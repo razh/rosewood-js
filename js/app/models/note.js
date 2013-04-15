@@ -1,8 +1,13 @@
 define(function() {
 
-  function Note() {
+  function Note( note, octave ) {
     this.midiValue = 0;
   }
+
+  Note.getMidiValue = function( note, octave ) {
+  };
+
+  Note.names = [ "C", "C\u266F", "D", "D\u266F", "E", "F", "F\u266F", "G", "G\u266F", "A", "A\u266F", "B" ];
 
   Note.C       =  0;
   Note.C_SHARP =  1;

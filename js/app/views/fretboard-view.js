@@ -1,0 +1,6 @@
+define(
+  [ 'ember' ],
+  function( Ember ) {
+
+  }
+);
