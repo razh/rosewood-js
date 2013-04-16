@@ -7,10 +7,11 @@ requirejs.config({
   },
 
   paths: {
-    'jquery': '../../lib/jquery/jquery-1.9.1.min',
-    'handlebars': '../../lib/handlebars/handlebars-1.0.rc.1.min',
-    'ember': '../../lib/ember/ember-1.0.0-rc.2.min',
-    'bootstrap': '../../lib/bootstrap/bootstrap.min'
+    'bootstrap': '../../lib/bootstrap/bootstrap.min',
+    'd3': '../../lib/d3/d3.v3',
+    'ember': '../../lib/ember/ember-1.0.0-rc.2',
+    'handlebars': '../../lib/handlebars/handlebars',
+    'jquery': '../../lib/jquery/jquery-1.9.1.min'
   }
 });
 

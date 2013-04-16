@@ -1,9 +1,9 @@
 define(
   [ 'main',
     './note' ],
-  function( Rosewood, Note ) {
+  function( App, Note ) {
 
-    Rosewood.Fretboard = DS.Model.extend({
+    App.Fretboard = DS.Model.extend({
 
     });
   }

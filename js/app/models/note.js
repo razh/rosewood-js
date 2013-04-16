@@ -2,12 +2,16 @@ define(function() {
 
   function Note( note, octave ) {
     this.midiValue = 0;
+
+    this.note = note;
+    this.octave = octave;
   }
 
   Note.getMidiValue = function( note, octave ) {
   };
 
   Note.names = [ "C", "C\u266F", "D", "D\u266F", "E", "F", "F\u266F", "G", "G\u266F", "A", "A\u266F", "B" ];
+  Note.regex = /(^[A-G])(\#|b)?(-?\d$)/; //Splits full note into note name, accidental, and octave.
 
   Note.C       =  0;
   Note.C_SHARP =  1;
