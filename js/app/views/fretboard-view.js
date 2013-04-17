@@ -9,7 +9,7 @@ define(
         for ( var i = 1; i < fretboard.length - 1; i++ ) {
           ctx.beginPath();
 
-          ctx.moveTo( ( i * stringSpacing ) + offset.x, offset.y - yInitFret );
+          ctx.moveTo( ( i * stringSpacing ) + offset.x, offset.y - startFretY );
           ctx.lineTo( ( i * stringSpacing ) + offset.x, fretboardLength + offset.y );
 
           ctx.stroke();
@@ -26,6 +26,19 @@ define(
 
       ctx.stroke();
       ctx.lineCap = "butt";
+    }
+
+    function drawFrets( ctx ) {
+      ctx.lineWidth = fretsWidth;
+
+      for ( var i = 1; i < fretboard[0].length - 1; i++ ) {
+        ctx.beginPath();
+
+        ctx.moveTo( offset.x, fretboard[0][i][1] + offset.y - startFretY );
+        ctx.lineTo( fretboardWidth + offset.x, fretboard[0][i][1] + offset.y - startFretY );
+
+        ctx.stroke();
+      }
     }
 
     var fretCount = 24;
