@@ -1,13 +1,12 @@
 define(
   [ 'main',
-    'ember' ],
-  function( App, Ember ) {
+    'underscore',
+    'backbone' ],
+  function( App, _, Backbone ) {
 
-    App.FretboardController = Ember.Object.create({
-
-      tuning: Ember.Object.create({
-       note: new Note()
-      })
+    App.Tuning = Backbone.Collection.extend({
+      model: App.Note
     });
+
   }
 );

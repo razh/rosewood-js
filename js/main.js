@@ -19,6 +19,54 @@ require(
     'underscore',
     'backbone' ],
   function( $, _, Backbone ) {
+    var Note = Backbone.Model.extend({
+
+    });
+
+    var Tuning = Backbone.Collection.extend({
+      model: Note
+    });
+
+    var TuningView = Backbone.View.extend({
+
+    });
+
+    var Fretboard = Backbone.Model.extend({
+      defaults: {
+        scaleLength: 1200,
+
+        startFret: 0,
+        endFret: 12,
+
+        stringSpacing: 30,
+
+        noteRadius: 9,
+        noteLineWidth: 2,
+
+        markerFont: '7pt Helvetica, Verdana',
+        markerRadius: 6
+      }
+    });
+
+    var FretboardView = Backbone.View.extend({
+      render: function() {
+        var model = this.model,
+            ctx   = this.$el.get(0).getContext( '2d' );
+
+        console.log( this.collection.length );
+      }
+    });
+
+    var Scale = Backbone.Model.extend({
+      defaults: {
+        degrees: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+      }
+    });
+
+    var Scales = Backbone.Collection.extend({
+      model: Scale
+    });
+
     var Box = Backbone.Model.extend({
       defaults: {
         x: 0,
@@ -76,5 +124,7 @@ require(
         collection: c
     });
     v.render();
+
+    return {};
   }
 );
