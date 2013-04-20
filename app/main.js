@@ -1,5 +1,8 @@
 requirejs.config({
   shim: {
+    'underscore': {
+      exports: '_'
+    },
     'backbone': {
       deps: [ 'jquery', 'underscore' ],
       exports: 'Backbone'
@@ -17,70 +20,11 @@ requirejs.config({
 require(
   [ 'jquery',
     'underscore',
-    'backbone' ],
-  function( $, _, Backbone ) {
-    var Note = Backbone.Model.extend({
-      defaults: {
-        note: 0,
-        octave: 0
-      },
-
-      /**
-       * Return note at given number of semitones away.
-       */
-      transpose: function( semitones ) {
-        var note = this.get( 'note' );
-        note = ( note + semitones ) % 12;
-        if ( note < 0 ) {
-          note += 12;
-        }
-
-        return note;
-      }
-    });
-
-    var Tuning = Backbone.Collection.extend({
-      model: Note
-    });
-
-    var TuningView = Backbone.View.extend({
-      initialize: function() {
-        this.collection = new Tuning();
-        _bindAll( this, render );
-        this.collection.bind( 'change', this.render );
-      },
-
-      render: function() {
-        this.$el.html( this.template( this.model.attributes ) );
-      }
-    });
-
-    var Fretboard = Backbone.Model.extend({
-      defaults: {
-        scaleLength: 1200,
-
-        startFret: 0,
-        endFret: 12,
-
-        stringSpacing: 30,
-
-        noteRadius: 9,
-        noteLineWidth: 2,
-
-        markerFont: '7pt Helvetica, Verdana',
-        markerRadius: 6
-      }
-    });
-
-    var FretboardView = Backbone.View.extend({
-      render: function() {
-        var model = this.model,
-            ctx   = this.$el.get(0).getContext( '2d' );
-
-        console.log( this.collection.length );
-      }
-    });
-
+    'backbone',
+    'models/note',
+    'models/tuning',
+    'views/tuning-view' ],
+  function( $, _, Backbone, Note, Tuning, TuningView ) {
     var Scale = Backbone.Model.extend({
       defaults: function() {
         return {
@@ -150,6 +94,21 @@ require(
         collection: c
     });
     v.render();
+
+    var tuning = new Tuning();
+    tuning.add({ note: Note.E, octave: 3 });
+    tuning.add({ note: Note.A, octave: 3 });
+    tuning.add({ note: Note.D, octave: 4 });
+    tuning.add({ note: Note.G, octave: 4 });
+    tuning.add({ note: Note.B, octave: 4 });
+    tuning.add({ note: Note.E, octave: 5 });
+
+    var view = new TuningView({
+      el: '#tuning-view',
+      collection: tuning
+    });
+
+    view.render();
 
     return {};
   }

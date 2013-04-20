@@ -1,7 +1,9 @@
 define(
-  [ 'main',
-    'ember' ],
-  function( App, Ember ) {
+  [ 'jquery',
+    'underscore',
+    'backbone',
+    'models/fretboard' ],
+  function( $, _, Backbone, Fretboard ) {
 
     function drawStrings() {
         ctx.lineWidth = stringsWidth;
@@ -68,24 +70,14 @@ define(
       return positions;
     }) ();
 
-    App.FretboardView = Ember.View.extend({
-      tagName: 'canvas',
 
-      width: 640,
-      height: 320,
-
-      startFret: 0,
-      endFret: 12,
-
-      update: function() {
-        var content = this.get( 'content' ),
-            canvas  = this.get( 'canvas' ),
-            ctx     = this.get( 'ctx' );
-      }.observes( 'content.@each.value' ),
-
-      didInsertElement: function() {
-
+    var FretboardView = Backbone.View.extend({
+      render: function() {
+        var model = this.model,
+            ctx   = this.$el.get(0).getContext( '2d' );
       }
     });
+
+    return FretboardView;
   }
 );
