@@ -31,6 +31,12 @@ require(
     });
 
     var TuningView = Backbone.View.extend({
+      el: $( 'tuning-view' ),
+
+      initialize: function() {
+        this.collection = new Tuning();
+      },
+
       render: function() {
 
       }
