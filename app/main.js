@@ -23,6 +23,19 @@ require(
       defaults: {
         note: 0,
         octave: 0
+      },
+
+      /**
+       * Return note at given number of semitones away.
+       */
+      transpose: function( semitones ) {
+        var note = this.get( 'note' );
+        note = ( note + semitones ) % 12;
+        if ( note < 0 ) {
+          note += 12;
+        }
+
+        return note;
       }
     });
 
@@ -31,14 +44,14 @@ require(
     });
 
     var TuningView = Backbone.View.extend({
-      el: $( 'tuning-view' ),
-
       initialize: function() {
         this.collection = new Tuning();
+        _bindAll( this, render );
+        this.collection.bind( 'change', this.render );
       },
 
       render: function() {
-
+        this.$el.html( this.template( this.model.attributes ) );
       }
     });
 
