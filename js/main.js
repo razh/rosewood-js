@@ -20,7 +20,10 @@ require(
     'backbone' ],
   function( $, _, Backbone ) {
     var Note = Backbone.Model.extend({
-
+      defaults: {
+        note: 0,
+        octave: 0
+      }
     });
 
     var Tuning = Backbone.Collection.extend({
@@ -28,7 +31,9 @@ require(
     });
 
     var TuningView = Backbone.View.extend({
+      render: function() {
 
+      }
     });
 
     var Fretboard = Backbone.Model.extend({
@@ -58,8 +63,10 @@ require(
     });
 
     var Scale = Backbone.Model.extend({
-      defaults: {
-        degrees: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+      defaults: function() {
+        return {
+          degrees: []
+        };
       }
     });
 
