@@ -6,6 +6,8 @@ define(
     'models/note' ],
   function( $, _, Backbone, Fretboard, Note ) {
 
+    var PI2 = 2 * Math.PI;
+
     function drawBorder( ctx, model, tuning ) {
       var length        = model.get( 'length' ),
 
@@ -15,7 +17,6 @@ define(
 
           xOffset       = model.get( 'xOffset' ),
           yOffset       = model.get( 'yOffset' );
-
 
       ctx.lineWidth = model.get( 'borderWidth' );
       // Switch length and width because of orientation.
@@ -31,6 +32,7 @@ define(
         ctx.lineWidth = model.get( 'stringWidth' );
         // Start off at one because of nut.
         var y;
+        ctx.beginPath();
         for ( var i = 0, n = tuning.length; i < n; i++ ) {
           y = ( i * stringSpacing ) + yOffset;
 
@@ -51,6 +53,7 @@ define(
 
       ctx.lineWidth = nutWidth;
       ctx.lineCap = 'square';
+      ctx.beginPath();
 
       ctx.moveTo( xOffset - nutWidth, yOffset );
       ctx.lineTo( xOffset - nutWidth, yOffset + width );
@@ -61,9 +64,11 @@ define(
 
     function drawFrets( ctx, model, tuning ) {
       var fretPositions = model.get( 'fretPositions' ),
+
           stringSpacing = model.get( 'stringSpacing' ),
           stringCount   = tuning.length,
           width         = stringSpacing * ( stringCount - 1 ),
+
           xOffset       = model.get( 'xOffset' ),
           yOffset       = model.get( 'yOffset' ),
           startFret     = model.get( 'startFret' ),
@@ -73,71 +78,72 @@ define(
 
       var x;
       for ( var i = startFret; i < endFret; i++ ) {
-        x = fretPositions[i] + xOffset;
+        x = xOffset + fretPositions[i];
 
-        ctx.moveTo( x, yOffset);
+        ctx.moveTo( x, yOffset );
         ctx.lineTo( x, yOffset + width );
       }
 
       ctx.stroke();
     }
 
-    function drawNotes( ctx, model, tuning ) {
-      var PI2 = 2 * Math.PI,
+    function drawNotes( ctx, model, tuning, root, scale ) {
+      var note,
           noteX, noteY,
-          position,
-          scaleDegree;
+          scaleDegree,
+          scaleDegrees = scale.get( 'degrees' );
 
-      var fretboard = model.get( 'fretboard' );
+      var fretPositions = model.get( 'fretPositions' ),
+          notePositions = model.get( 'notePositions' ),
+          stringSpacing = model.get( 'stringSpacing' ),
+          stringCount   = tuning.length,
+          width         = stringSpacing * ( stringCount - 1 ),
+          nutWidth      = model.get( 'nutWidth' ),
+
+          xOffset       = model.get( 'xOffset' ),
+          yOffset       = model.get( 'yOffset' ),
+          startFret     = model.get( 'startFret' ),
+          endFret       = model.get( 'endFret' ),
+
+          noteRadius    = model.get( 'noteRadius' ),
+          noteFills     = model.get( 'noteFills' ),
+          noteTextFills = model.get( 'noteTextFills' );
 
       ctx.lineWidth    = model.get( 'noteLineWidth' );
       ctx.font         = model.get( 'noteFont' );
       ctx.textAlign    = 'center';
       ctx.textBaseline = 'middle';
 
-      for ( var i = 0, n = fretboard.length; i < n; i++ ) {
+      for ( var i = 0; i < stringCount; i++ ) {
+        noteY = yOffset + width - ( i * stringSpacing );
 
-        position = fretboard[i][0][2].scalePosition( scale );
-        scaleDegree =  ( scale[ position ] + ( 12 - root ) ) % 12;
+        for ( var j = startFret; j <= endFret; j++ ) {
+          note = tuning.at(i).transpose(j);
+          // Add twelve to avoid negative notes.
+          scaleDegree = ( note - root + 12 ) % 12;
 
-        if ( position > -1 ) {
-          noteX = fretboard[i][0][1] + yOffset - yInitFret - nutWidth;
-          noteY = canvas.height - (fretboard[i][0][0] + xOffset);
+          // Only render the note if it is in scale.
+          if ( _.indexOf( scaleDegrees, scaleDegree, true ) === -1 ) {
+            continue;
+          }
+
+          if ( j === 0 ) {
+            noteX = xOffset - nutWidth;
+          } else {
+            noteX = xOffset + notePositions[j];
+          }
 
           // Draw note.
-          ctx.fillStyle = noteFillArray[ scaleDegree ];
+          ctx.fillStyle = noteFills[ scaleDegree ];
 
           ctx.beginPath();
-          ctx.arc( noteX, noteY, noteRadius, 0, TWO_PI, true );
+          ctx.arc( noteX, noteY, noteRadius, 0, PI2, true );
           ctx.fill();
           ctx.stroke();
 
           // Draw note name.
-          ctx.fillStyle = noteFontFillArray[ scaleDegree ];
-          ctx.fillText( fretboard[i][0][2].getNoteName(), noteX, noteY );
-        }
-
-        for ( var j = 1; j < fretboard[0].length; j++ ) {
-
-          position = fretboard[i][j][2].scalePosition( scale );
-          scaleDegree =  ( scale[ position ] + ( 12 - root ) ) % 12;
-
-          if ( position > -1 ) {
-            noteX = 0.5 * ( fretboard[i][ j - 1 ][1] + fretboard[i][j][1] ) + yOffset - yInitFret;
-            noteY = canvas.height - ( fretboard[i][j][0] + xOffset );
-
-            // Draw note.
-            ctx.fillStyle = noteFillArray[ scaleDegree ];
-
-            ctx.beginPath();
-            ctx.arc( noteX, noteY, noteRadius, 0, TWO_PI, true );
-            ctx.fill();
-            ctx.stroke();
-
-            // Draw note name.
-            ctx.fillStyle = noteFontFillArray[ scaleDegree ];
-            ctx.fillText( fretboard[i][j][2].getNoteName(), noteX, noteY );
-          }
+          ctx.fillStyle = noteTextFills[ scaleDegree ];
+          ctx.fillText( Note.names[ note ], noteX, noteY );
         }
       }
     }
@@ -153,10 +159,13 @@ define(
             tuning = this.collection,
             ctx    = this.$el.get(0).getContext( '2d' );
 
+        ctx.strokeStyle = model.get( 'foregroundColor' );
+
         drawBorder( ctx, model, tuning );
         drawNut( ctx, model, tuning );
         drawFrets( ctx, model, tuning );
         drawStrings( ctx, model, tuning );
+        drawNotes( ctx, model, tuning, this.options.root, this.options.scales.at( this.options.scaleIndex ) );
       }
     });
 

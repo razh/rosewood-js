@@ -53,20 +53,22 @@ require(
       collection: scales
     });
 
+    var fretboard = new Fretboard();
     scales.fetch({
       success: function() {
         scalesView.render();
+
+        var fretboardView = new FretboardView({
+           el: '#fretboard-view',
+           model: fretboard,
+           collection: tuning,
+           root: Note.E,
+           scales: scales,
+           scaleIndex: 0
+        });
+
+        fretboardView.render();
       }
     });
-
-    var fretboard = new Fretboard();
-    var fretboardView = new FretboardView({
-       el: '#fretboard-view',
-       model: fretboard,
-       collection: tuning
-    });
-    fretboardView.render();
-
-    return {};
   }
 );

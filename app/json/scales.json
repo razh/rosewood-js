@@ -10,5 +10,13 @@
   {
     "name": "minor",
     "degrees": [ 0, 2, 3, 5, 7, 8, 10 ]
+  },
+  {
+    "name": "major-pentatonic",
+    "degrees": [ 0, 2, 4, 7, 9 ]
+  },
+  {
+    "name": "major-triad",
+    "degrees": [ 0, 2, 4 ]
   }
 ]

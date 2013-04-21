@@ -11,12 +11,11 @@ define(
      function fretPositions( model ) {
       var constantSpacing = model.get( 'constantSpacing' ),
           scaleLength     = model.get( 'scaleLength' ),
-          startFret       = model.get( 'startFret' ),
           endFret         = model.get( 'endFret' );
 
       var positions = [];
       var position;
-      for ( var i = startFret; i <= endFret; i++ ) {
+      for ( var i = 0; i <= endFret; i++ ) {
         if ( constantSpacing ) {
           positions.push( i * spacing );
         } else {
@@ -34,6 +33,7 @@ define(
       var fretPositions = model.get( 'fretPositions' );
 
       var positions = [];
+      positions.push(0);
       var position;
       for ( var i = 0, n = fretPositions.length; i < n; i++ ) {
         position = 0.5 * ( fretPositions[i] + fretPositions[ i + 1 ] );
@@ -42,6 +42,32 @@ define(
       }
 
       return positions;
+    }
+
+    function noteFills( model ) {
+      var backgroundColor = model.get( 'backgroundColor' ),
+          foregroundColor = model.get( 'foregroundColor' );
+
+      var fills = [];
+      fills.push( foregroundColor );
+      for ( var i = 0; i < 11; i++ ) {
+        fills.push( backgroundColor );
+      }
+
+      return fills;
+    }
+
+    function noteTextFills( model ) {
+      var backgroundColor = model.get( 'backgroundColor' ),
+          foregroundColor = model.get( 'foregroundColor' );
+
+      var fills = [];
+      fills.push( backgroundColor );
+      for ( var i = 0; i < 11; i++ ) {
+        fills.push( foregroundColor );
+      }
+
+      return fills;
     }
 
     var Fretboard = Backbone.Model.extend({
@@ -56,7 +82,7 @@ define(
           foregroundColor: 'rgba(  27,  27,  27, 1.0 )',
 
           xOffset: 50,
-          yOffset: 125,
+          yOffset: 50,
 
           scaleLength: 1200,
           constantSpacing: false,
@@ -75,6 +101,8 @@ define(
           noteFont: '7pt Helvetica, Verdana',
           noteLineWidth: 2,
           noteRadius: 9,
+          noteFills: [],
+          noteTextFills: [],
 
           markerFill: 'rgba( 72, 72, 72, 1.0 )',
           markerFont: '7pt Helvetica, Verdana',
@@ -85,6 +113,8 @@ define(
       initialize: function() {
         this.set( 'fretPositions', fretPositions( this ) );
         this.set( 'notePositions', notePositions( this ) );
+        this.set( 'noteFills', noteFills( this ) );
+        this.set( 'noteTextFills', noteTextFills( this ) );
       },
 
       get: function( attr ) {
@@ -102,8 +132,7 @@ define(
       },
 
       xStart: function() {
-        var fretPositions = this.get( 'fretPositions' );
-        return fretPositions[0];
+        return this.get( 'fretPositions' )[0];
       }
     });
 
