@@ -8,6 +8,10 @@ define(
 
     var PI2 = 2 * Math.PI;
 
+    function clear( ctx ) {
+      ctx.clearRect( 0, 0, ctx.canvas.width, ctx.canvas.height );
+    }
+
     function drawBorder( ctx, model, tuning ) {
       var length        = model.get( 'length' ),
 
@@ -71,13 +75,12 @@ define(
 
           xOffset       = model.get( 'xOffset' ),
           yOffset       = model.get( 'yOffset' ),
-          startFret     = model.get( 'startFret' ),
           endFret       = model.get( 'endFret' );
 
       ctx.lineWidth = model.get( 'fretWidth' );
 
       var x;
-      for ( var i = startFret; i < endFret; i++ ) {
+      for ( var i = 0; i < endFret; i++ ) {
         x = xOffset + fretPositions[i];
 
         ctx.moveTo( x, yOffset );
@@ -152,12 +155,16 @@ define(
 
       initialize: function() {
         _.bindAll( this, 'render' );
+        this.model.bind( 'change', this.render );
       },
 
       render: function() {
         var model  = this.model,
             tuning = this.collection,
+            scales = this.options.scales,
             ctx    = this.$el.get(0).getContext( '2d' );
+
+        clear( ctx );
 
         ctx.strokeStyle = model.get( 'foregroundColor' );
 
@@ -165,7 +172,7 @@ define(
         drawNut( ctx, model, tuning );
         drawFrets( ctx, model, tuning );
         drawStrings( ctx, model, tuning );
-        drawNotes( ctx, model, tuning, this.options.root, this.options.scales.at( this.options.scaleIndex ) );
+        drawNotes( ctx, model, tuning, this.options.root, scales.at( model.get( 'scaleIndex' ) ) );
       }
     });
 

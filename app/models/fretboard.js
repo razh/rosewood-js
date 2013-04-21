@@ -98,6 +98,8 @@ define(
           stringSpacing: 30,
           stringWidth: 2,
 
+          scaleIndex: 0,
+
           noteFont: '7pt Helvetica, Verdana',
           noteLineWidth: 2,
           noteRadius: 9,

@@ -1,7 +1,7 @@
-<% _.each( scales, function( scale, i ) { %>
+<select size="<%= scales.length %>">
+  <% _.each( scales, function( scale, i ) { %>
 
-  <ul>
-    <li><%= scale.get( 'name' ) %></li>
-  </ul>
+  <option value="<%= i %>"><%= scale.get( 'name' ) %></option>
 
-<% }); %>
+  <% }); %>
+</select>

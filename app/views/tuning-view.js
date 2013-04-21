@@ -14,7 +14,8 @@ define(
       },
 
       render: function() {
-        this.$el.html( this.template({ notes: this.collection.models }) );
+        // Reverse copy of Tuning model.
+        this.$el.html( this.template({ notes: _.clone( this.collection.models ).reverse() }) );
       }
     });
 

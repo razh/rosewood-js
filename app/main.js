@@ -48,12 +48,13 @@ require(
 
     var scales = new Scales();
 
+    var fretboard = new Fretboard();
     var scalesView = new ScalesView({
       el: '#scales-view',
-      collection: scales
+      collection: scales,
+      fretboard: fretboard
     });
 
-    var fretboard = new Fretboard();
     scales.fetch({
       success: function() {
         scalesView.render();
@@ -63,8 +64,7 @@ require(
            model: fretboard,
            collection: tuning,
            root: Note.E,
-           scales: scales,
-           scaleIndex: 0
+           scales: scales
         });
 
         fretboardView.render();

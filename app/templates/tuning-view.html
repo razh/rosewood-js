@@ -1,7 +1,9 @@
 <% _.each( notes, function( note, i ) { %>
 
-  <ul>
-    <li><%= note.toString() %></li>
-  </ul>
+  <div>
+    <%= note.toString() %>
+    <button class="note add">+</button>
+    <button class="note subtract">-</button>
+  </div>
 
 <% }); %>
