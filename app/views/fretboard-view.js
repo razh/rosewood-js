@@ -156,6 +156,7 @@ define(
       initialize: function() {
         _.bindAll( this, 'render' );
         this.model.bind( 'change', this.render );
+        this.listenTo( this.collection, 'change', this.render );
       },
 
       render: function() {

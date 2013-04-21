@@ -3,32 +3,40 @@ define(
     'underscore',
     'backbone',
     'collections/tuning',
+    'views/note-view',
     'text!templates/tuning-view.html' ],
-  function( $, _, Backbone, Tuning, tuningTemplate  ) {
+  function( $, _, Backbone, Tuning, NoteView, tuningTemplate  ) {
 
     var TuningView = Backbone.View.extend({
       template: _.template( tuningTemplate ),
 
       events: {
-        'click .note.add': 'add',
-        'click .note.subtract': 'subtract'
+        'click .tuning.add': 'add',
+        'click .tuning.subtract': 'subtract'
       },
 
       initialize: function() {
-        _.bindAll( this, 'render' );
+        this.noteViews = [];
+        _.bindAll( this, 'render', 'add' );
+        this.listenTo( this.collection, 'all', this.render );
+
+        this.collection.each( this.add );
       },
 
       render: function() {
-        // Reverse copy of Tuning model.
-        this.$el.html( this.template({ notes: _.clone( this.collection.models ).reverse() }) );
+        var that = this;
+        // Reverse so that lowest string is at the bottom.
+        _( _.clone( this.noteViews ).reverse() ).each(function( noteView ) {
+          that.$el.append( noteView.render().el );
+        });
+
+        return this;
       },
 
-      add: function() {
-        console.log( 'add' );
-      },
-
-      subtract: function() {
-        console.log( 'subtract' );
+      add: function( note ) {
+        this.noteViews.push(new NoteView({
+          model: note
+        }));
       }
     });
 

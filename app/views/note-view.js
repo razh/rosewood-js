@@ -21,15 +21,15 @@ define(
 
       render: function() {
         this.$el.html( this.template({ note: this.model }) );
+        return this;
       },
 
       add: function() {
-        console.log( 'addNote' );
-        this.model.set( 'note', this.model.get( 'note' ) + 1 );
+        this.model.transposeSelf(1);
       },
 
       subtract: function() {
-        console.log( 'subtractNote' );
+        this.model.transposeSelf(-1);
       }
 
     });

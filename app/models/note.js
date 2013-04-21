@@ -21,6 +21,35 @@ define(
         return note;
       },
 
+      transposeSelf: function( semitones ) {
+        var note   = this.get( 'note' ),
+            octave = this.get( 'octave' );
+        note += semitones;
+
+        // Limit note.
+        if ( note <= 0 && octave === 0 ) {
+          note = 0;
+        } else if ( note > 11 && octave === 10 ) {
+          note = 11;
+        }
+
+        // Calculate number of octaves we need to shift.
+        var octaves = Math.floor( note / 12 );
+        octave += octaves;
+        octave = Math.min( Math.max( octave, 0 ), 10 );
+
+        // Make sure note is in [0, 11].
+        note %= 12;
+        if ( note < 0 ) {
+          note += 12;
+        }
+
+        this.set( 'note', note );
+        this.set( 'octave', octave );
+
+        return this;
+      },
+
       toString: function() {
         return Note.names[ this.get( 'note' ) ] +  this.get( 'octave' );
       }
