@@ -1,6 +1,6 @@
 define(
   [ 'backbone',
-    'models/tuning' ],
+    'collections/tuning' ],
   function( Backbone, Tuning ) {
 
     var Fretboard = Backbone.Model.extend({

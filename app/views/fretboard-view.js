@@ -5,8 +5,8 @@ define(
     'models/fretboard' ],
   function( $, _, Backbone, Fretboard ) {
 
-    function drawStrings() {
-        ctx.lineWidth = stringsWidth;
+    function drawStrings( ctx ) {
+        ctx.lineWidth = this.get( 'stringWidth' );
 
         for ( var i = 1; i < fretboard.length - 1; i++ ) {
           ctx.beginPath();

@@ -22,20 +22,13 @@ require(
     'underscore',
     'backbone',
     'models/note',
-    'models/tuning',
-    'views/tuning-view' ],
-  function( $, _, Backbone, Note, Tuning, TuningView ) {
-    var Scale = Backbone.Model.extend({
-      defaults: function() {
-        return {
-          degrees: []
-        };
-      }
-    });
-
-    var Scales = Backbone.Collection.extend({
-      model: Scale
-    });
+    'models/scale',
+    'collections/scales',
+    'collections/tuning',
+    'views/scales-view',
+    'views/tuning-view',
+    'text!json/scales.json' ],
+  function( $, _, Backbone, Note, Scale, Scales, Tuning, ScalesView, TuningView, scalesJSON ) {
 
     var Box = Backbone.Model.extend({
       defaults: {
@@ -103,12 +96,22 @@ require(
     tuning.add({ note: Note.B, octave: 4 });
     tuning.add({ note: Note.E, octave: 5 });
 
-    var view = new TuningView({
+    var tuningView = new TuningView({
       el: '#tuning-view',
       collection: tuning
     });
 
-    view.render();
+    tuningView.render();
+
+    console.log( scalesJSON );
+    var scales = new Scales( JSON.parse( scalesJSON ) );
+
+    var scalesView = new ScalesView({
+      el: '#scales-view',
+      collection: scales
+    });
+
+    scalesView.render();
 
     return {};
   }
