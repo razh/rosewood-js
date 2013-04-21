@@ -9,6 +9,11 @@ define(
     var TuningView = Backbone.View.extend({
       template: _.template( tuningTemplate ),
 
+      events: {
+        'click .note.add': 'add',
+        'click .note.subtract': 'subtract'
+      },
+
       initialize: function() {
         _.bindAll( this, 'render' );
       },
@@ -16,6 +21,14 @@ define(
       render: function() {
         // Reverse copy of Tuning model.
         this.$el.html( this.template({ notes: _.clone( this.collection.models ).reverse() }) );
+      },
+
+      add: function() {
+        console.log( 'add' );
+      },
+
+      subtract: function() {
+        console.log( 'subtract' );
       }
     });
 
