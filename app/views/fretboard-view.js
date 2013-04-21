@@ -2,91 +2,128 @@ define(
   [ 'jquery',
     'underscore',
     'backbone',
-    'models/fretboard' ],
-  function( $, _, Backbone, Fretboard ) {
+    'models/fretboard',
+    'models/note' ],
+  function( $, _, Backbone, Fretboard, Note ) {
 
     function drawStrings( ctx, model, tuning ) {
-        ctx.lineWidth = model.get( 'stringWidth' );
-
         var stringSpacing = model.get( 'stringSpacing' ),
-            nutWidth = model.get( 'nutWidth' ),
-            xOffset = model.get( 'xOffset' ),
-            yOffset = model.get( 'yOffset' );
+            length        = model.get( 'fretboard' ).length - 1 * stringSpacing,
+            xOffset       = model.get( 'xOffset' ),
+            yOffset       = model.get( 'yOffset' );
 
+        ctx.lineWidth = model.get( 'stringWidth' );
         // Start off at one because of nut.
+        var y;
         for ( var i = 1, n = tuning.length; i < n; i++ ) {
-          ctx.moveTo(       yOffset, ( i * stringSpacing ) + xOffset );
-          ctx.lineTo( 500 + yOffset, ( i * stringSpacing ) + xOffset );
+          y = ( i * stringSpacing ) + yOffset;
+
+          ctx.moveTo( xOffset,          y );
+          ctx.lineTo( xOffset + length, y );
         }
 
         ctx.stroke();
     }
 
-    function drawNut( ctx ) {
+    function drawNut( ctx, model ) {
+      var fretboard = model.get( 'fretboard' ),
+          width     = fretboard[0][ fretboard[0].length - 1 ][0] - fretboard[0][0][0];
+          nutWidth  = model.get( 'nutWidth' ),
+          xOffset   = model.get( 'xOffset' ),
+          yOffset   = model.get( 'yOffset' );
+
       ctx.lineWidth = nutWidth;
-      ctx.lineCap = "square";
+      ctx.lineCap = 'square';
       ctx.beginPath();
 
-      ctx.moveTo( offset.x, offset.y - nutWidth );
-      ctx.lineTo( width + offset.x, offset.y - nutWidth );
+      ctx.moveTo( xOffset,         yOffset - nutWidth );
+      ctx.lineTo( xOffset + width, yOffset - nutWidth );
 
       ctx.stroke();
-      ctx.lineCap = "butt";
+      ctx.lineCap = 'butt';
     }
 
-    function drawFrets( ctx, model ) {
-      ctx.lineWidth = model.get( 'width' );
+    function drawFrets( ctx, model, tuning ) {
+      var fretPositions = model.get( 'fretPositions' ),
+          stringSpacing = model.get( 'stringSpacing' ),
+          stringCount   = tuning.length,
+          width         = stringSpacing * stringCount,
+          xOffset       = model.get( 'xOffset' ),
+          yOffset       = model.get( 'yOffset' ),
+          startFretX    = fretPositions[0];
 
-      // for ( var i = 1; i < fretboard[0].length - 1; i++ ) {
-      //   ctx.beginPath();
+      ctx.lineWidth = model.get( 'fretWidth' );
 
-      //   ctx.moveTo( offset.x, fretboard[0][i][1] + offset.y - startFretY );
-      //   ctx.lineTo( fretboardWidth + offset.x, fretboard[0][i][1] + offset.y - startFretY );
+      var x;
+      for ( var i = 1; i < fretPositions.length - 1; i++ ) {
+        x = fretPositions[i] + xOffset - startFretX;
 
-      //   ctx.stroke();
-      // }
+        ctx.moveTo( x, yOffset);
+        ctx.lineTo( x, yOffset + width );
+      }
+
+      ctx.stroke();
     }
 
-    var fretCount = 24;
-    var spacing;
-    var scaleLength = 1;
+    function drawNotes( ctx, model, tuning ) {
+      var PI2 = 2 * Math.PI,
+          noteX, noteY,
+          position,
+          scaleDegree;
 
-    /*
-      For a fret position p, scale length s, and fret number n:
+      var fretboard = model.get( 'fretboard' );
 
-        p = s - ( s / ( 2 ^ ( n / 12 ) ) )
-     */
-    var fretPositions = (function() {
-      var positions = [];
-      var constant = false;
+      ctx.lineWidth = noteStrokeWidth;
+      ctx.font = model.get( 'noteFont' );
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
 
-      var position;
-      for ( var i = 0; i <= fretCount; i++ ) {
-        if ( constant ) {
-          positions.push( i * spacing );
-        } else {
-          position = scaleLength - ( scaleLength / Math.pow( 2, ( i / 12 ) ) );
-          position = Math.round( position * 1e3 ) * 1e-3; // Three-digit precision.
-          positions.push( position );
+      for ( var i = 0, n = fretboard.length; i < n; i++ ) {
+
+        position = fretboard[i][0][2].scalePosition( scale );
+        scaleDegree =  ( scale[ position ] + ( 12 - root ) ) % 12;
+
+        if ( position > -1 ) {
+          noteX = fretboard[i][0][1] + yOffset - yInitFret - nutWidth;
+          noteY = canvas.height - (fretboard[i][0][0] + xOffset);
+
+          // Draw note.
+          ctx.fillStyle = noteFillArray[ scaleDegree ];
+
+          ctx.beginPath();
+          ctx.arc( noteX, noteY, noteRadius, 0, TWO_PI, true );
+          ctx.fill();
+          ctx.stroke();
+
+          // Draw note name.
+          ctx.fillStyle = noteFontFillArray[ scaleDegree ];
+          ctx.fillText( fretboard[i][0][2].getNoteName(), noteX, noteY );
+        }
+
+        for ( var j = 1; j < fretboard[0].length; j++ ) {
+
+          position = fretboard[i][j][2].scalePosition( scale );
+          scaleDegree =  ( scale[ position ] + ( 12 - root ) ) % 12;
+
+          if ( position > -1 ) {
+            noteX = 0.5 * ( fretboard[i][ j - 1 ][1] + fretboard[i][j][1] ) + yOffset - yInitFret;
+            noteY = canvas.height - ( fretboard[i][j][0] + xOffset );
+
+            // Draw note.
+            ctx.fillStyle = noteFillArray[ scaleDegree ];
+
+            ctx.beginPath();
+            ctx.arc( noteX, noteY, noteRadius, 0, TWO_PI, true );
+            ctx.fill();
+            ctx.stroke();
+
+            // Draw note name.
+            ctx.fillStyle = noteFontFillArray[ scaleDegree ];
+            ctx.fillText( fretboard[i][j][2].getNoteName(), noteX, noteY );
+          }
         }
       }
-
-      return positions;
-    }) ();
-
-    // Positions of notes along fretboard.
-    var notePositions = (function() {
-      var positions = [];
-
-      var position;
-      for ( var i = 0, n = fretPositions.length; i < n; i++ ) {
-        position = 0.5 * ( fretPositions[i] + fretPositions[ i + 1 ] );
-        position = Math.round( position * 1e3 ) * 1e-3;
-        positions.push( position );
-      }
-
-      return positions;
-    }) ();
+    }
 
     var FretboardView = Backbone.View.extend({
 
@@ -99,10 +136,10 @@ define(
             tuning = this.collection,
             ctx    = this.$el.get(0).getContext( '2d' );
 
+        // drawNut( ctx, model );
         drawFrets( ctx, model, tuning );
         drawStrings( ctx, model, tuning );
       }
-
     });
 
     return FretboardView;
