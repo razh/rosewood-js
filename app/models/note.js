@@ -22,9 +22,8 @@ define(
       },
 
       transposeSelf: function( semitones ) {
-        var note   = this.get( 'note' ),
+        var note   = this.get( 'note' ) + semitones,
             octave = this.get( 'octave' );
-        note += semitones;
 
         // Limit note.
         if ( note <= 0 && octave === 0 ) {

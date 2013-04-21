@@ -31,7 +31,6 @@ define(
       subtract: function() {
         this.model.transposeSelf(-1);
       }
-
     });
 
     return NoteView;

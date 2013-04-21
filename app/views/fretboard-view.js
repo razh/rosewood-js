@@ -8,6 +8,48 @@ define(
 
     var PI2 = 2 * Math.PI;
 
+    var FretboardView = Backbone.View.extend({
+
+      initialize: function() {
+        _.bindAll( this, 'render', 'onKeyDown' );
+        this.model.bind( 'change', this.render );
+        $( document ).bind( 'keydown', this.onKeyDown );
+        this.listenTo( this.collection, 'change', this.render );
+      },
+
+      render: function() {
+        var model  = this.model,
+            tuning = this.collection,
+            scales = this.options.scales,
+            ctx    = this.$el.get(0).getContext( '2d' );
+
+        clear( ctx );
+
+        ctx.strokeStyle = model.get( 'foregroundColor' );
+
+        drawBorder( ctx, model, tuning );
+        drawNut( ctx, model, tuning );
+        drawFrets( ctx, model, tuning );
+        drawStrings( ctx, model, tuning );
+        drawNotes( ctx, model, tuning, model.get( 'root' ).get( 'note' ), scales.at( model.get( 'scaleIndex' ) ) );
+      },
+
+      onKeyDown: function( event ) {
+        var model = this.model;
+        switch ( event.which ) {
+          // [.
+          case 219:
+            model.get( 'root' ).set( 'note', model.get( 'root' ).transpose(-1) );
+            break;
+
+          // ].
+          case 221:
+            model.get( 'root' ).set( 'note', model.get( 'root' ).transpose(1) );
+            break;
+        }
+      }
+    });
+
     function clear( ctx ) {
       ctx.clearRect( 0, 0, ctx.canvas.width, ctx.canvas.height );
     }
@@ -150,32 +192,6 @@ define(
         }
       }
     }
-
-    var FretboardView = Backbone.View.extend({
-
-      initialize: function() {
-        _.bindAll( this, 'render' );
-        this.model.bind( 'change', this.render );
-        this.listenTo( this.collection, 'change', this.render );
-      },
-
-      render: function() {
-        var model  = this.model,
-            tuning = this.collection,
-            scales = this.options.scales,
-            ctx    = this.$el.get(0).getContext( '2d' );
-
-        clear( ctx );
-
-        ctx.strokeStyle = model.get( 'foregroundColor' );
-
-        drawBorder( ctx, model, tuning );
-        drawNut( ctx, model, tuning );
-        drawFrets( ctx, model, tuning );
-        drawStrings( ctx, model, tuning );
-        drawNotes( ctx, model, tuning, this.options.root, scales.at( model.get( 'scaleIndex' ) ) );
-      }
-    });
 
     return FretboardView;
   }

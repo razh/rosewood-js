@@ -10,16 +10,14 @@ define(
     var TuningView = Backbone.View.extend({
       template: _.template( tuningTemplate ),
 
-      events: {
-        'click .tuning.add': 'add',
-        'click .tuning.subtract': 'subtract'
-      },
-
       initialize: function() {
         this.noteViews = [];
-        _.bindAll( this, 'render', 'add' );
-        this.listenTo( this.collection, 'all', this.render );
+        _.bindAll( this,
+          'render',
+          'add'
+        );
 
+        this.listenTo( this.collection, 'all', this.render );
         this.collection.each( this.add );
       },
 

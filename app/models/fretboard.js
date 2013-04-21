@@ -1,7 +1,83 @@
 define(
   [ 'backbone',
+    'models/note',
     'collections/tuning' ],
-  function( Backbone, Tuning ) {
+  function( Backbone, Note, Tuning ) {
+
+    var Fretboard = Backbone.Model.extend({
+      defaults: function() {
+        return {
+          fretPositions: [],
+          notePositions: [],
+
+          fretCount: 12,
+
+          backgroundColor: 'rgba( 250, 250, 250, 1.0 )',
+          foregroundColor: 'rgba(  27,  27,  27, 1.0 )',
+
+          xOffset: 50,
+          yOffset: 50,
+
+          scaleLength: 1200,
+          constantSpacing: false,
+
+          borderWidth: 3,
+
+          startFret: 0,
+          endFret: 12,
+          fretWidth: 2,
+
+          nutWidth: 5,
+
+          stringSpacing: 30,
+          stringWidth: 2,
+
+          // E above middle C.
+          root: new Note({ note: Note.E, octave: 4 }),
+          scaleIndex: 0,
+
+          noteFont: '7pt Helvetica, Verdana',
+          noteLineWidth: 2,
+          noteRadius: 9,
+          noteFills: [],
+          noteTextFills: [],
+
+          markerFill: 'rgba( 72, 72, 72, 1.0 )',
+          markerFont: '7pt Helvetica, Verdana',
+          markerRadius: 6
+        };
+      },
+
+      initialize: function() {
+        this.set( 'fretPositions', fretPositions( this ) );
+        this.set( 'notePositions', notePositions( this ) );
+        this.set( 'noteFills', noteFills( this ) );
+        this.set( 'noteTextFills', noteTextFills( this ) );
+
+        // Trigger a change if the root is changed.
+        this.listenTo( this.get( 'root' ), 'change', function() {
+          this.trigger( 'change' );
+        });
+      },
+
+      get: function( attr ) {
+        if ( typeof this[ attr ] === 'function' ) {
+          return this[ attr ]();
+        }
+
+        return Backbone.Model.prototype.get.call(this, attr);
+      },
+
+      // Custom getters.
+      length: function() {
+        var fretPositions = this.get( 'fretPositions' );
+        return fretPositions[ fretPositions.length - 1 ] - fretPositions[0];
+      },
+
+      xStart: function() {
+        return this.get( 'fretPositions' )[0];
+      }
+    });
 
     /*
       For a fret position p, scale length s, and fret number n:
@@ -69,74 +145,6 @@ define(
 
       return fills;
     }
-
-    var Fretboard = Backbone.Model.extend({
-      defaults: function() {
-        return {
-          fretPositions: [],
-          notePositions: [],
-
-          fretCount: 12,
-
-          backgroundColor: 'rgba( 250, 250, 250, 1.0 )',
-          foregroundColor: 'rgba(  27,  27,  27, 1.0 )',
-
-          xOffset: 50,
-          yOffset: 50,
-
-          scaleLength: 1200,
-          constantSpacing: false,
-
-          borderWidth: 3,
-
-          startFret: 0,
-          endFret: 12,
-          fretWidth: 2,
-
-          nutWidth: 5,
-
-          stringSpacing: 30,
-          stringWidth: 2,
-
-          scaleIndex: 0,
-
-          noteFont: '7pt Helvetica, Verdana',
-          noteLineWidth: 2,
-          noteRadius: 9,
-          noteFills: [],
-          noteTextFills: [],
-
-          markerFill: 'rgba( 72, 72, 72, 1.0 )',
-          markerFont: '7pt Helvetica, Verdana',
-          markerRadius: 6
-        };
-      },
-
-      initialize: function() {
-        this.set( 'fretPositions', fretPositions( this ) );
-        this.set( 'notePositions', notePositions( this ) );
-        this.set( 'noteFills', noteFills( this ) );
-        this.set( 'noteTextFills', noteTextFills( this ) );
-      },
-
-      get: function( attr ) {
-        if ( typeof this[ attr ] === 'function' ) {
-          return this[ attr ]();
-        }
-
-        return Backbone.Model.prototype.get.call(this, attr);
-      },
-
-      // Custom getters.
-      length: function() {
-        var fretPositions = this.get( 'fretPositions' );
-        return fretPositions[ fretPositions.length - 1 ] - fretPositions[0];
-      },
-
-      xStart: function() {
-        return this.get( 'fretPositions' )[0];
-      }
-    });
 
     return Fretboard;
   }

@@ -17,20 +17,20 @@ requirejs.config({
   }
 });
 
-require(
-  [ 'jquery',
-    'underscore',
-    'backbone',
-    'models/note',
-    'models/fretboard',
-    'models/scale',
-    'collections/scales',
-    'collections/tuning',
-    'views/fretboard-view',
-    'views/note-view',
-    'views/scales-view',
-    'views/tuning-view' ],
-  function( $, _, Backbone, Note, Fretboard, Scale, Scales, Tuning, FretboardView, NoteView, ScalesView, TuningView, scalesJSON ) {
+define(
+  function( require ) {
+    var $             = require( 'jquery' ),
+        _             = require( 'underscore' ),
+        Backbone      = require( 'backbone' ),
+        Note          = require( 'models/note' ),
+        Fretboard     = require( 'models/fretboard' ),
+        Scale         = require( 'models/scale' ),
+        Scales        = require( 'collections/scales' ),
+        Tuning        = require( 'collections/tuning' ),
+        FretboardView = require( 'views/fretboard-view' ),
+        NoteView      = require( 'views/note-view' ),
+        ScalesView    = require( 'views/scales-view' ),
+        TuningView    = require( 'views/tuning-view' );
 
     var tuning = new Tuning();
     tuning.add({ note: Note.E, octave: 3 });
@@ -48,8 +48,8 @@ require(
     tuningView.render();
 
     var scales = new Scales();
-
     var fretboard = new Fretboard();
+
     var scalesView = new ScalesView({
       el: '#scales-view',
       collection: scales,
@@ -64,7 +64,6 @@ require(
            el: '#fretboard-view',
            model: fretboard,
            collection: tuning,
-           root: Note.E,
            scales: scales
         });
 
