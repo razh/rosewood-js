@@ -7,27 +7,24 @@ define(
   function( $, _, Backbone, Fretboard, Note ) {
 
     function drawBorder( ctx, model, tuning ) {
-      var fretPositions = model.get( 'fretPositions' ),
-          length        = fretPositions[ fretPositions.length - 1 ] - fretPositions[0],
+      var length        = model.get( 'length' ),
 
           stringSpacing = model.get( 'stringSpacing' ),
           stringCount   = tuning.length,
           width         = stringSpacing * ( stringCount - 1 ),
 
           xOffset       = model.get( 'xOffset' ),
-          yOffset       = model.get( 'yOffset' ),
-          startFretX    = fretPositions[0];
+          yOffset       = model.get( 'yOffset' );
 
 
       ctx.lineWidth = model.get( 'borderWidth' );
       // Switch length and width because of orientation.
-      ctx.strokeRect( xOffset - startFretX, yOffset, length, width );
+      ctx.strokeRect( xOffset, yOffset, length, width );
     }
 
     function drawStrings( ctx, model, tuning ) {
         var stringSpacing = model.get( 'stringSpacing' ),
-            fretPositions = model.get( 'fretPositions' ),
-            length        = fretPositions[ fretPositions.length - 1 ] - fretPositions[0],
+            length        = model.get( 'length' ),
             xOffset       = model.get( 'xOffset' ),
             yOffset       = model.get( 'yOffset' );
 
@@ -69,13 +66,14 @@ define(
           width         = stringSpacing * ( stringCount - 1 ),
           xOffset       = model.get( 'xOffset' ),
           yOffset       = model.get( 'yOffset' ),
-          startFretX    = fretPositions[0];
+          startFret     = model.get( 'startFret' ),
+          endFret       = model.get( 'endFret' );
 
       ctx.lineWidth = model.get( 'fretWidth' );
 
       var x;
-      for ( var i = 1; i < fretPositions.length - 1; i++ ) {
-        x = fretPositions[i] + xOffset - startFretX;
+      for ( var i = startFret; i < endFret; i++ ) {
+        x = fretPositions[i] + xOffset;
 
         ctx.moveTo( x, yOffset);
         ctx.lineTo( x, yOffset + width );
@@ -92,9 +90,9 @@ define(
 
       var fretboard = model.get( 'fretboard' );
 
-      ctx.lineWidth = noteStrokeWidth;
-      ctx.font = model.get( 'noteFont' );
-      ctx.textAlign = 'center';
+      ctx.lineWidth    = model.get( 'noteLineWidth' );
+      ctx.font         = model.get( 'noteFont' );
+      ctx.textAlign    = 'center';
       ctx.textBaseline = 'middle';
 
       for ( var i = 0, n = fretboard.length; i < n; i++ ) {

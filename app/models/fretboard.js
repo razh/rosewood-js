@@ -10,12 +10,13 @@ define(
      */
      function fretPositions( model ) {
       var constantSpacing = model.get( 'constantSpacing' ),
-          fretCount       = model.get( 'fretCount' ),
-          scaleLength     = model.get( 'scaleLength' );
+          scaleLength     = model.get( 'scaleLength' ),
+          startFret       = model.get( 'startFret' ),
+          endFret         = model.get( 'endFret' );
 
       var positions = [];
       var position;
-      for ( var i = 0; i <= fretCount; i++ ) {
+      for ( var i = startFret; i <= endFret; i++ ) {
         if ( constantSpacing ) {
           positions.push( i * spacing );
         } else {
@@ -46,8 +47,6 @@ define(
     var Fretboard = Backbone.Model.extend({
       defaults: function() {
         return {
-          fretboard: [],
-
           fretPositions: [],
           notePositions: [],
 
@@ -86,6 +85,25 @@ define(
       initialize: function() {
         this.set( 'fretPositions', fretPositions( this ) );
         this.set( 'notePositions', notePositions( this ) );
+      },
+
+      get: function( attr ) {
+        if ( typeof this[ attr ] === 'function' ) {
+          return this[ attr ]();
+        }
+
+        return Backbone.Model.prototype.get.call(this, attr);
+      },
+
+      // Custom getters.
+      length: function() {
+        var fretPositions = this.get( 'fretPositions' );
+        return fretPositions[ fretPositions.length - 1 ] - fretPositions[0];
+      },
+
+      xStart: function() {
+        var fretPositions = this.get( 'fretPositions' );
+        return fretPositions[0];
       }
     });
 
