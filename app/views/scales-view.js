@@ -9,6 +9,10 @@ define(
     var ScalesView = Backbone.View.extend({
       template: _.template( scalesTemplate ),
 
+      initialize: function() {
+        _.bindAll( this, 'render' );
+      },
+
       render: function() {
         this.$el.html( this.template({ scales: this.collection.models }) );
       }

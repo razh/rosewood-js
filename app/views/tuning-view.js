@@ -9,6 +9,10 @@ define(
     var TuningView = Backbone.View.extend({
       template: _.template( tuningTemplate ),
 
+      initialize: function() {
+        _.bindAll( this, 'render' );
+      },
+
       render: function() {
         this.$el.html( this.template({ notes: this.collection.models }) );
       }

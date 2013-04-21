@@ -4,7 +4,8 @@ define(
     function( Backbone, Scale ) {
 
       var Scales = Backbone.Collection.extend({
-        model: Scale
+        model: Scale,
+        url: 'app/json/scales.json'
       });
 
       return Scales;
