@@ -10,8 +10,8 @@ define(
      */
      function fretPositions( model ) {
       var constantSpacing = model.get( 'constantSpacing' ),
-          fretCount = model.get( 'fretCount' ),
-          scaleLength = model.get( 'scaleLength' );
+          fretCount       = model.get( 'fretCount' ),
+          scaleLength     = model.get( 'scaleLength' );
 
       var positions = [];
       var position;
@@ -62,9 +62,13 @@ define(
           scaleLength: 1200,
           constantSpacing: false,
 
+          borderWidth: 3,
+
           startFret: 0,
           endFret: 12,
           fretWidth: 2,
+
+          nutWidth: 5,
 
           stringSpacing: 30,
           stringWidth: 2,

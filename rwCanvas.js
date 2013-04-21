@@ -43,7 +43,7 @@ var backgroundColor = "rgba( 250, 250, 250, 1.0 )",
 		notelabels: true,
 		gradient: true
 	},
-	
+
 	bFullscreen = false;
 
 	bordersWidth = 3,
@@ -89,7 +89,7 @@ var noteFont = "7pt Helvetica, Verdana",
 var yInitFret = fretboard[0][0][1],
 	fretboardLength = fretboard[0][ endFret - initFret ][1] - yInitFret,
 	fretboardWidth = ( fretboard.length - 1 ) * stringSpacing;
-	
+
 var fullscreenPadding = 20;
 
 var canvas = $( "#rosewood" )[0],
@@ -137,7 +137,7 @@ var scale = GMajScale,
 // var scale = new Scale( 9, bluesScale );
 
 function init() {
-	ctx = canvas.getContext( "2d" );	
+	ctx = canvas.getContext( "2d" );
 
 	// jQuery's mousescroll event does not give us the scroll wheel data.
 	if ( canvas.addEventListener ) {
@@ -153,18 +153,18 @@ function init() {
 		.mouseup( onMouseUp )
 		.mouseout( onMouseUp )
 		.mousemove( canvasPan );
-	
+
     $( document ).keyup( keyFunctions );
-	
+
 	xOffset = ~~( 0.5 * ( canvas.width - fretboardWidth ) );
 	yOffset = ~~( 0.5 * ( canvas.height - fretboardLength ) );
-	
+
 	if ( orientation === 1 ) {
 		temp = canvas.width;
 		canvas.width = canvas.height;
 		canvas.height = temp;
 	}
-	
+
 	origWidth = canvas.width;
 	origHeight = canvas.height;
 
@@ -173,11 +173,11 @@ function init() {
 
 function toggleOrientation() {
 	orientation === 0 ? orientation = 1 : orientation = 0;
-	
+
 	temp = canvas.width;
 	canvas.width = canvas.height;
 	canvas.height = temp;
-	
+
 	// When toggling orientation, we want the fullscreen toggle to revert back to the correct orientation:
 	// Horizontal fullscreen -> Horizontal normal size.
 	// Vertical fullscreen -> Vertical normal size.
@@ -190,7 +190,7 @@ function toggleOrientation() {
 		canvas.width = window.innerWidth - fullscreenPadding;
 		canvas.height = window.innerHeight - fullscreenPadding;
 	}
-	
+
 	// Render in correct position.
 	if ( orientation === 0 ) {
 		xOffset = ~~( 0.5 * ( canvas.width - fretboardWidth ) );
@@ -200,9 +200,9 @@ function toggleOrientation() {
 		xOffset = ~~( 0.5 * ( canvas.height - fretboardWidth ) );
 		yOffset = ~~( 0.5 * ( canvas.width - fretboardLength ) );
 	}
-	
+
 	zoom = 1.0;
-	
+
 	draw();
 }
 
@@ -259,7 +259,7 @@ function testFPS( numFrames ) {
 		iterations = numFrames;
 
 	t0 = new Date().getTime();
-	
+
 	while ( iterations-- ) {
 		resetZoom();
 		draw();
@@ -276,14 +276,14 @@ function drawBackground() {
 
 	ctx.fillStyle = backgroundColor;
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
-	
+
 	ctx.restore();
 }
 
 function drawGradient() {
 	ctx.save();
 	ctx.setTransform( 1, 0, 0, 1, 0, 0 );
-	
+
 	var vertLinGrad = ctx.createLinearGradient( 0, 0, 0, canvas.height );
 	vertLinGrad.addColorStop( 0, "rgba( 200, 200, 200, 1.0 )" );
 	vertLinGrad.addColorStop( 0.05, "rgba( 255, 255, 255, 0.0 )" );
@@ -291,7 +291,7 @@ function drawGradient() {
 	vertLinGrad.addColorStop( 1, "rgba( 200, 200, 200, 1.0 )" );
 	ctx.fillStyle = vertLinGrad;
 	ctx.fillRect( 0, 0, canvas.width, canvas.height );
-	
+
 	var horzLinGrad = ctx.createLinearGradient( 0, 0, canvas.width, 0 );
 	horzLinGrad.addColorStop( 0, "rgba( 200, 200, 200, 1.0 )" );
 	horzLinGrad.addColorStop( 0.05, "rgba( 255, 255, 255, 0.0 )" );
@@ -299,7 +299,7 @@ function drawGradient() {
 	horzLinGrad.addColorStop( 1, "rgba( 200, 200, 200, 1.0 )" );
 	ctx.fillStyle = horzLinGrad;
 	ctx.fillRect( 0, 0, canvas.width, canvas.height );
-	
+
 	ctx.restore();
 }
 
@@ -307,7 +307,7 @@ function drawNut() {
 	ctx.lineWidth = nutWidth;
 	ctx.lineCap = "square";
 	ctx.beginPath();
-	
+
 	if ( orientation === 0 ) {
 		ctx.moveTo( xOffset, yOffset - nutWidth );
 		ctx.lineTo( fretboardWidth + xOffset, yOffset - nutWidth );
@@ -316,14 +316,14 @@ function drawNut() {
 		ctx.moveTo( yOffset - nutWidth, xOffset );
 		ctx.lineTo( yOffset - nutWidth, fretboardWidth + xOffset );
 	}
-	
+
 	ctx.stroke();
 	ctx.lineCap = "butt";
 }
 
 function drawBorders() {
     ctx.lineWidth = bordersWidth;
-	
+
 	if ( orientation === 0 ) {
 		ctx.strokeRect( xOffset, yOffset - yInitFret, fretboardWidth, fretboardLength );
 	}
@@ -334,7 +334,7 @@ function drawBorders() {
 
 function drawStrings() {
     ctx.lineWidth = stringsWidth;
-	
+
     for ( var i = 1; i < fretboard.length - 1; i++ ) {
         ctx.beginPath();
 		if ( orientation === 0 ) {
@@ -368,10 +368,10 @@ function drawFrets() {
 
 //TODO: Draws the root key name.
 function drawKey() {
-	
+
 }
 
-// Although it is certainly possible for drawLabels to be integrated into 
+// Although it is certainly possible for drawLabels to be integrated into
 // drawMarkers (this was case beforehand), keeping the function separate
 // allows us to toggle them on and off in the UI. No significant performance
 // problems arise. Easier to read.
@@ -393,21 +393,21 @@ function drawLabels() {
 
 		while ( i-- ) {
 			fret = ( i + initFret - 1 ) % 12;
-			
+
 			// Draw labels on 3rd, 5th, 7th, 9th, 12th frets.
 			if ( fret === 2 || fret === 4 || fret === 6 || fret === 8 || fret == 11 ) {
 				if ( orientation === 0 ) {
 					labelX = labelDist * stringSpacing + xOffset;
-					labelY = 0.5 * ( stdFretboard[0][ i - 1 ][1] + stdFretboard[0][i][1] )  + yOffset - yInitFret;	
+					labelY = 0.5 * ( stdFretboard[0][ i - 1 ][1] + stdFretboard[0][i][1] )  + yOffset - yInitFret;
 
 					// Coordinates for an equilateral triangle.
 					p0x = ( labelDist - 0.75 ) * stringSpacing + xOffset;
 					p1x = p0x + ( pLength * SQRT_3 );
 					p2x = p1x;
-					
+
 					p0y = labelY;
 					p1y = labelY - pLength;
-					p2y = labelY + pLength;					
+					p2y = labelY + pLength;
 				}
 				else {
 					labelX =  0.5 * ( fretboard[0][ i - 1 ][1] + fretboard[0][i][1] )  + yOffset - yInitFret;
@@ -417,7 +417,7 @@ function drawLabels() {
 					p0x = labelX;
 					p1x = labelX - pLength;
 					p2x = labelX + pLength;
-					
+
 					p0y = canvas.height - ( ( labelDist - 0.75 ) * stringSpacing + xOffset);
 					p1y = p0y - ( pLength * SQRT_3 );
 					p2y = p1y;
@@ -429,7 +429,7 @@ function drawLabels() {
 				ctx.lineTo( p1x, p1y );
 				ctx.lineTo( p2x, p2y );
 				ctx.fill();
-	
+
 				// Draw the label.
 				ctx.fillText( ( fret + 1 ), labelX, labelY );
 			}
@@ -442,12 +442,12 @@ function drawMarkers() {
 	var TWO_PI = Math.PI * 2,
 		markerX, markerY,
 		fret;
-	
+
 	// Guitar fretboard markers are at frets 3, 5, 7, 9,  12 (2 dots). Pattern repeats.
 	if ( fretboard.length == 6 ) {
-		
+
 		var i = fretboard[0].length;
-		
+
 		ctx.font = markerFont;
 		ctx.fillStyle = markerFill;
 		ctx.textAlign = "center";
@@ -455,14 +455,14 @@ function drawMarkers() {
 
 		while ( i-- ) {
 			fret = ( i + initFret - 1 ) % 12;
-			
+
 			ctx.fillStyle = markerFill;
 
 			if ( fret === 2 || fret === 4 || fret === 6 || fret === 8 || fret == 11 ) {
 				if ( orientation === 0 ) {
 					markerX = 2.5 * stringSpacing + xOffset;
 					markerY = 0.5 * ( fretboard[0][ i - 1 ][1] + fretboard[0][i][1] )  + yOffset - yInitFret;
-					
+
 					if ( fret === 11 ) {
 						markerX = 0.5 * stringSpacing + xOffset;
 					}
@@ -470,7 +470,7 @@ function drawMarkers() {
 				else {
 					markerX = 0.5 * ( fretboard[0][ i - 1 ][1] + fretboard[0][i][1] )  + yOffset - yInitFret;
 					markerY = 2.5 * stringSpacing + xOffset;
-					
+
 					if ( fret === 11 ) {
 						markerY = 0.5 * stringSpacing + xOffset;
 					}
@@ -493,7 +493,7 @@ function drawMarkers() {
 					ctx.arc( markerX, markerY, markerRadius, 0, TWO_PI, true );
 					ctx.fill();
 				}
-			
+
 				// Draw fret label on markers.
 				if ( fret !== 11 ) {
 					ctx.fillStyle = backgroundColor;
@@ -509,17 +509,17 @@ function drawNotes() {
 		noteX, noteY,
 		position,
 		scaleDegree;
-	
+
 	ctx.lineWidth = noteStrokeWidth;
 	ctx.font = noteFont;
 	ctx.textAlign = "center";
 	ctx.textBaseline = "middle";
 
     for ( var i = 0; i < fretboard.length; i++ ) {
-		
+
 		position = fretboard[i][0][2].scalePosition( scale );
 		scaleDegree =  ( scale[ position ] + ( 12 - root ) ) % 12;
-		
+
 		if ( position > -1 ) {
 			if ( orientation === 0 ) {
 				noteX = fretboard[i][0][0] + xOffset;
@@ -549,7 +549,7 @@ function drawNotes() {
 
 			position = fretboard[i][j][2].scalePosition( scale );
 			scaleDegree =  ( scale[ position ] + ( 12 - root ) ) % 12;
-			
+
 			if ( position > -1 ) {
 				if ( orientation === 0 ) {
 					noteX = fretboard[i][j][0] + xOffset;
@@ -562,7 +562,7 @@ function drawNotes() {
 
 				// Draw note.
 				ctx.fillStyle = noteFillArray[ scaleDegree ];
-				
+
 				ctx.beginPath();
 				ctx.arc( noteX, noteY, noteRadius, 0, TWO_PI, true );
 				ctx.fill();
@@ -581,25 +581,25 @@ function drawNotes() {
 /*
  * The functions canvasZoom and cancelEvent have been modified from the examples in the following tutorial:
  * http://www.switchonthecode.com/tutorials/javascript-tutorial-the-scroll-wheel
- * 
+ *
  * Behavior for the canvasZoom function (assume origin is at fretboard center):
  * 1. Translate the fretboard's center to the origin point.
  * 2. Apply the transform using given wheel data.
- * 3. Translate back to original fretboard center coordinates. 
+ * 3. Translate back to original fretboard center coordinates.
  */
 function canvasZoom( e ){
     e = e ? e : window.event;
-	
+
 	// Compensate for differences between browser scroll reporting.
 	var wheelData = e.detail ? e.detail * -1 : e.wheelDelta / 40,
 		// speedFactor = 10;
 		// zoomScale = Math.abs( wheelData ) / speedFactor + 1; // If wheelData is 3, zoom will be 1.3. Note that +/-3 should be the standard value for wheelData.
-		zoomScale = 1.2; 
-		
+		zoomScale = 1.2;
+
 	if ( wheelData < 0 ) {
 		zoomScale = 1 / zoomScale; // Zooming scale is inverted; n scrolls in + n scrolls out = default image.
 	}
-	
+
 	zoom = zoom * zoomScale;
 
 	ctx.save();
@@ -616,7 +616,7 @@ function canvasZoom( e ){
 		ctx.scale( zoomScale, zoomScale ) ;
 		ctx.translate( -( yOffset + ( 0.5 * fretboardLength ) ), -( xOffset + ( 0.5 * fretboardWidth ) ) );
 	}
-	
+
 	draw();
 
 	return cancelEvent( e );
@@ -627,27 +627,27 @@ function canvasZoom( e ){
 	1.  Entire fretboard shown. ( fretboardLength + yOffset ) / canvas.height
 	2. Subsection shown.
 	3, Fits the fretboard width to the corresponding canvas metric. fretboardWidth / canvas.width
-	
+
 	Marker labels and fret labels are shown according to zoom levels.
 	We will only be able to pan along the major axis.
 */
 function canvasZoom2ElectricBoogaloo( e ) {
 	var zoom;
-	
+
 	if ( orientation === 0 ) {
 		zoom = {
 			0 : ( fretboardLength + ( 2 * yOffset ) ) / canvas.height,
 			1 : ( fretboardWidth + ( 2 * xOffset ) ) / canvas.width,
 			2 : ( fretboardWidth + ( 5 * noteRadius ) ) / canvas.width
 		};
-		
-		
-		
-		
-		
+
+
+
+
+
 	}
 	else {
-		
+
 	}
 }
 function keyFunctions ( e ) {
@@ -696,7 +696,7 @@ function spacebarReset( e  ) {
 
 function toggleFullscreen( e ) {
 	e = e ? e : window.event;
-	
+
 	if ( e.keyCode === 70 ) {
 		if ( bFullscreen ) {
 			canvas.width = origWidth;
@@ -709,7 +709,7 @@ function toggleFullscreen( e ) {
 			bFullscreen = true;
 		}
 	}
-	
+
 	// Set fullscreen.
 	if ( orientation === 0 ) {
 		xOffset = ~~( 0.5 * ( canvas.width - fretboardWidth ) );
@@ -727,13 +727,13 @@ function transposeKey( e ) {
 	e = e ? e : window.event;
 
 	var i = scale.length;
-	
+
 	if ( e.keyCode === 219 ) {
 		while( i-- ) {
 			// Apparently, JavaScript's naive modulo function does not like handling negative numbers.
 			if ( ( scale[i] - 1 ) === -1 ) {
 				scale[i] = 12;
-			}	
+			}
 			scale[i] = ( scale[i] - 1 ) % 12;
 		}
 	}
@@ -744,7 +744,7 @@ function transposeKey( e ) {
 	}
 
 	root = scale[0];
-	
+
 	draw();
 }
 
@@ -776,12 +776,12 @@ function cancelEvent( e ) {
 function canvasPan( e ) {
 	if ( mouseDown == true ) {
 		e = e ? e : window.event;
-		
+
 		var currMouseX = e.clientX,
 			currMouseY = e.clientY,
 			dX = currMouseX - lastMouseX
 			dY = currMouseY - lastMouseY;
-		
+
 		ctx.save();
 		clearCanvas();
 		ctx.restore();
@@ -790,14 +790,14 @@ function canvasPan( e ) {
 			if ( orientation === 0  ) {
 				ctx.transform( 1, 0, 0, 1, 0, dY / zoom);
 			}
-			else { 
+			else {
 				ctx.transform( 1, 0, 0, 1, dX / zoom, 0);
 			}
 		}
 		else {
 			ctx.transform( 1, 0, 0, 1, dX / zoom, dY / zoom );
 		}
-		
+
 		lastMouseX = currMouseX;
 		lastMouseY = currMouseY;
 		draw();

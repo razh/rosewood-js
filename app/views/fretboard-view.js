@@ -6,16 +6,35 @@ define(
     'models/note' ],
   function( $, _, Backbone, Fretboard, Note ) {
 
+    function drawBorder( ctx, model, tuning ) {
+      var fretPositions = model.get( 'fretPositions' ),
+          length        = fretPositions[ fretPositions.length - 1 ] - fretPositions[0],
+
+          stringSpacing = model.get( 'stringSpacing' ),
+          stringCount   = tuning.length,
+          width         = stringSpacing * ( stringCount - 1 ),
+
+          xOffset       = model.get( 'xOffset' ),
+          yOffset       = model.get( 'yOffset' ),
+          startFretX    = fretPositions[0];
+
+
+      ctx.lineWidth = model.get( 'borderWidth' );
+      // Switch length and width because of orientation.
+      ctx.strokeRect( xOffset - startFretX, yOffset, length, width );
+    }
+
     function drawStrings( ctx, model, tuning ) {
         var stringSpacing = model.get( 'stringSpacing' ),
-            length        = model.get( 'fretboard' ).length - 1 * stringSpacing,
+            fretPositions = model.get( 'fretPositions' ),
+            length        = fretPositions[ fretPositions.length - 1 ] - fretPositions[0],
             xOffset       = model.get( 'xOffset' ),
             yOffset       = model.get( 'yOffset' );
 
         ctx.lineWidth = model.get( 'stringWidth' );
         // Start off at one because of nut.
         var y;
-        for ( var i = 1, n = tuning.length; i < n; i++ ) {
+        for ( var i = 0, n = tuning.length; i < n; i++ ) {
           y = ( i * stringSpacing ) + yOffset;
 
           ctx.moveTo( xOffset,          y );
@@ -25,19 +44,19 @@ define(
         ctx.stroke();
     }
 
-    function drawNut( ctx, model ) {
-      var fretboard = model.get( 'fretboard' ),
-          width     = fretboard[0][ fretboard[0].length - 1 ][0] - fretboard[0][0][0];
-          nutWidth  = model.get( 'nutWidth' ),
-          xOffset   = model.get( 'xOffset' ),
-          yOffset   = model.get( 'yOffset' );
+    function drawNut( ctx, model, tuning ) {
+      var stringSpacing = model.get( 'stringSpacing' ),
+          stringCount   = tuning.length,
+          width         = stringSpacing * ( stringCount - 1 ),
+          nutWidth      = model.get( 'nutWidth' ),
+          xOffset       = model.get( 'xOffset' ),
+          yOffset       = model.get( 'yOffset' );
 
       ctx.lineWidth = nutWidth;
       ctx.lineCap = 'square';
-      ctx.beginPath();
 
-      ctx.moveTo( xOffset,         yOffset - nutWidth );
-      ctx.lineTo( xOffset + width, yOffset - nutWidth );
+      ctx.moveTo( xOffset - nutWidth, yOffset );
+      ctx.lineTo( xOffset - nutWidth, yOffset + width );
 
       ctx.stroke();
       ctx.lineCap = 'butt';
@@ -47,7 +66,7 @@ define(
       var fretPositions = model.get( 'fretPositions' ),
           stringSpacing = model.get( 'stringSpacing' ),
           stringCount   = tuning.length,
-          width         = stringSpacing * stringCount,
+          width         = stringSpacing * ( stringCount - 1 ),
           xOffset       = model.get( 'xOffset' ),
           yOffset       = model.get( 'yOffset' ),
           startFretX    = fretPositions[0];
@@ -136,7 +155,8 @@ define(
             tuning = this.collection,
             ctx    = this.$el.get(0).getContext( '2d' );
 
-        // drawNut( ctx, model );
+        drawBorder( ctx, model, tuning );
+        drawNut( ctx, model, tuning );
         drawFrets( ctx, model, tuning );
         drawStrings( ctx, model, tuning );
       }
