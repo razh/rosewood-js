@@ -72,7 +72,6 @@ define(
         });
 
         fretboardView.render();
-        console.log( tunings );
       }
     );
   }
