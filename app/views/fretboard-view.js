@@ -229,7 +229,6 @@ define(
         // Draw label text.
         ctx.fillText( fret, labelX, labelY );
       });
-
     }
 
     function drawNotes( ctx, model, tuning, root, scale ) {

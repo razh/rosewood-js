@@ -27,18 +27,19 @@ define(
         Scale         = require( 'models/scale' ),
         Scales        = require( 'collections/scales' ),
         Tuning        = require( 'collections/tuning' ),
+        Tunings       = require( 'collections/tunings' ),
         FretboardView = require( 'views/fretboard-view' ),
         NoteView      = require( 'views/note-view' ),
         ScalesView    = require( 'views/scales-view' ),
         TuningView    = require( 'views/tuning-view' );
 
     var tuning = new Tuning();
-    tuning.add({ note: Note.E, octave: 3 });
-    tuning.add({ note: Note.A, octave: 3 });
-    tuning.add({ note: Note.D, octave: 4 });
-    tuning.add({ note: Note.G, octave: 4 });
-    tuning.add({ note: Note.B, octave: 4 });
-    tuning.add({ note: Note.E, octave: 5 });
+    tuning.add({ note: Note.E, octave: 2 });
+    tuning.add({ note: Note.A, octave: 2 });
+    tuning.add({ note: Note.D, octave: 3 });
+    tuning.add({ note: Note.G, octave: 3 });
+    tuning.add({ note: Note.B, octave: 3 });
+    tuning.add({ note: Note.E, octave: 4 });
 
     var tuningView = new TuningView({
       el: '#tuning-view',
@@ -56,19 +57,23 @@ define(
       fretboard: fretboard
     });
 
-    scales.fetch({
-      success: function() {
+    var tunings = new Tunings();
+
+    // When we have the tunings and the scales, we may render.
+    $.when( tunings.fetch(), scales.fetch() )
+     .then(function() {
         scalesView.render();
 
         var fretboardView = new FretboardView({
-           el: '#fretboard-view',
-           model: fretboard,
-           collection: tuning,
-           scales: scales
+          el: '#fretboard-view',
+          model: fretboard,
+          collection: tuning,
+          scales: scales
         });
 
         fretboardView.render();
+        console.log( tunings );
       }
-    });
+    );
   }
 );
