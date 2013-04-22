@@ -15,8 +15,9 @@ define(
           'add'
         );
 
-        this.listenTo( this.collection, 'all', this.render );
-        this.collection.each( this.add );
+        var tuning = this.model.get( 'tuning' );
+        this.listenTo( tuning, 'add', this.render );
+        tuning.each( this.add );
       },
 
       render: function() {
@@ -34,17 +35,24 @@ define(
         this.noteViews.push(new NoteView({
           model: note
         }));
+      },
+
+      clear: function() {
+        for ( var i = this.noteViews.length - 1; i >= 0; i-- ) {
+          this.noteViews[i].remove();
+        }
+
+        this.noteViews = [];
+      },
+
+      reset: function( models, options ) {
+        this.clear();
+
+        this.model = models;
+        this.model.each( this.add );
+
+        this.render();
       }
-      // },
-
-      // clear: function() {
-      //   for ( var i = this.noteViews.length - 1; i >= 0; i-- ) {
-      //     this.noteViews[i].remove();
-      //   }
-
-      //   this.noteViews = [];
-      //   this.collection.reset();
-      // }
     });
 
     return TuningView;

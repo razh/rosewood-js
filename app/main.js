@@ -51,7 +51,7 @@ define(
 
         var tuningView = new TuningView({
           el : '#tuning-view',
-          collection: tunings.at( fretboard.get( 'tuningIndex' ) ).get( 'tuning' )
+          model: tunings.at( fretboard.get( 'tuningIndex' ) )
         });
 
         tuningView.render();
