@@ -32,21 +32,20 @@ define(
         NoteView      = require( 'views/note-view' ),
         ScalesView    = require( 'views/scales-view' ),
         TuningView    = require( 'views/tuning-view' ),
-        TuningsView    = require( 'views/tunings-view' );
+        TuningsView   = require( 'views/tunings-view' );
 
     var scales = new Scales();
+    var tunings = new Tunings();
     var fretboard = new Fretboard();
 
     var scalesView = new ScalesView({
       el: '#scales-view',
       collection: scales,
-      fretboard: fretboard
+      fretboard: fretboard // fretboard has a scaleIndex.
     });
 
-    var tunings = new Tunings();
-
     // When we have the tunings and the scales, we may render.
-    $.when( tunings.fetch(), scales.fetch() )
+    $.when( scales.fetch(), tunings.fetch() )
      .then(function() {
         scalesView.render();
 
@@ -61,7 +60,8 @@ define(
         var tuningsView = new TuningsView({
           el: '#tunings-view',
           collection: tunings,
-          fretboard: fretboard
+          fretboard: fretboard, // fretboard has a tuningIndex.
+          tuningView: tuningView
         });
 
         tuningsView.render();

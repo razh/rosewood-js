@@ -20,6 +20,7 @@ define(
       },
 
       render: function() {
+        console.log( 'tuningView');
         var that = this;
         // Reverse so that lowest string is at the bottom.
         _( _.clone( this.noteViews ).reverse() ).each(function( noteView ) {
@@ -34,6 +35,16 @@ define(
           model: note
         }));
       }
+      // },
+
+      // clear: function() {
+      //   for ( var i = this.noteViews.length - 1; i >= 0; i-- ) {
+      //     this.noteViews[i].remove();
+      //   }
+
+      //   this.noteViews = [];
+      //   this.collection.reset();
+      // }
     });
 
     return TuningView;
