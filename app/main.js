@@ -67,7 +67,7 @@ define(
         var fretboardView = new FretboardView({
           el: '#fretboard-view',
           model: fretboard,
-          collection: tuning,
+          collection: tunings,
           scales: scales
         });
 

@@ -9,6 +9,7 @@ define(
       defaults: function() {
         return {
           name: '',
+          notes: [],
           tuning: new Tuning()
         };
       }

@@ -6,8 +6,7 @@ define(
     'models/note' ],
   function( $, _, Backbone, Fretboard, Note ) {
 
-    var PI2    = 2 * Math.PI,
-        SQRT_3 = Math.sqrt(3);
+    var PI2 = 2 * Math.PI;
 
     var FretboardView = Backbone.View.extend({
 
@@ -22,9 +21,12 @@ define(
 
       render: function() {
         var model  = this.model,
-            tuning = this.collection,
+            tuning = this.collection.at( model.get( 'tuningIndex' ) ).get( 'tuning' ),
             scales = this.options.scales,
             ctx    = this.$el.get(0).getContext( '2d' );
+            console.log( model.get( 'tuningIndex' ) + ', ' + this.collection.length );
+            console.log( this.collection.at( model.get( 'tuningIndex' ) ) ) ;
+            console.log( tuning );
 
         ctx.fillStyle = model.get( 'backgroundColor' );
         ctx.fillRect( 0, 0, ctx.canvas.width, ctx.canvas.height );
@@ -38,8 +40,8 @@ define(
           drawStrings,
           drawLabels,
           drawMarkers
-        ], function( func ) {
-          func.call( this, ctx, model, tuning );
+        ], function( fn ) {
+          fn.call( this, ctx, model, tuning );
         });
 
         drawNotes( ctx, model, tuning, model.get( 'root' ).get( 'note' ), scales.at( model.get( 'scaleIndex' ) ) );
@@ -209,7 +211,7 @@ define(
 
       labelY = yOffset - 2 * labelDistance;
       y0 = labelY + 0.8 * labelDistance;
-      y1 = y0 - ( labelLength * SQRT_3 );
+      y1 = y0 - ( labelLength * Math.sqrt(3) );
       y2 = y1;
 
       _.each( [ 3, 5, 7, 9, 12 ], function( fret ) {
