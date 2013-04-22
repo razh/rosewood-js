@@ -1,11 +1,9 @@
 define(
-  [ 'jquery',
-    'underscore',
+  [ 'underscore',
     'backbone',
-    'collections/tuning',
     'views/note-view',
     'text!templates/tuning-view.html' ],
-  function( $, _, Backbone, Tuning, NoteView, tuningTemplate  ) {
+  function( _, Backbone, NoteView, tuningTemplate  ) {
 
     var TuningView = Backbone.View.extend({
       template: _.template( tuningTemplate ),

@@ -31,7 +31,8 @@ define(
         FretboardView = require( 'views/fretboard-view' ),
         NoteView      = require( 'views/note-view' ),
         ScalesView    = require( 'views/scales-view' ),
-        TuningView    = require( 'views/tuning-view' );
+        TuningView    = require( 'views/tuning-view' ),
+        TuningsView    = require( 'views/tunings-view' );
 
     var scales = new Scales();
     var fretboard = new Fretboard();
@@ -53,7 +54,18 @@ define(
           el : '#tuning-view',
           collection: tunings.at( fretboard.get( 'tuningIndex' ) ).get( 'tuning' )
         });
+
         tuningView.render();
+
+
+        var tuningsView = new TuningsView({
+          el: '#tunings-view',
+          collection: tunings,
+          fretboard: fretboard
+        });
+
+        tuningsView.render();
+
 
         var fretboardView = new FretboardView({
           el: '#fretboard-view',

@@ -1,6 +1,10 @@
 [
   {
-    "name": "standard",
+    "name": "Standard",
     "notes": [ "E2", "A2", "D3", "G3", "B3", "E4" ]
+  },
+  {
+    "name": "Dropped-D",
+    "notes": [ "D2", "A2", "D3", "G3", "B3", "E4" ]
   }
 ]

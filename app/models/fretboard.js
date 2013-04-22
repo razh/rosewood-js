@@ -82,6 +82,14 @@ define(
 
       xStart: function() {
         return this.get( 'fretPositions' )[0];
+      },
+
+      scaleIndex: function() {
+        return Backbone.Model.prototype.get.call( this, 'scaleIndex' ) || 0;
+      },
+
+      tuningIndex: function() {
+        return Backbone.Model.prototype.get.call( this, 'tuningIndex' ) || 0;
       }
     });
 

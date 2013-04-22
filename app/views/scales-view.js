@@ -1,10 +1,8 @@
 define(
-  [ 'jquery',
-    'underscore',
+  [ 'underscore',
     'backbone',
-    'collections/scales',
     'text!templates/scales-view.html' ],
-  function( $, _, Backbone, Scales, scalesTemplate ) {
+  function( _, Backbone, scalesTemplate ) {
 
     var ScalesView = Backbone.View.extend({
       template: _.template( scalesTemplate ),

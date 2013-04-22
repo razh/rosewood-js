@@ -1,0 +1,7 @@
+<select size="<%= tunings.length %>">
+  <% _.each( tunings, function( tuning, i ) { %>
+
+  <option value="<%= i %>"><%= tuning.get( 'name' ) %></option>
+
+  <% }); %>
+</select>
