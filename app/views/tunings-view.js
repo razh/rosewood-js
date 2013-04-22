@@ -1,8 +1,9 @@
 define(
   [ 'underscore',
     'backbone',
+    'models/note',
     'text!templates/tunings-view.html' ],
-  function( _, Backbone, tuningsTemplate ) {
+  function( _, Backbone, Note, tuningsTemplate ) {
 
     var TuningsView = Backbone.View.extend({
       template: _.template( tuningsTemplate ),
@@ -24,9 +25,14 @@ define(
         this.options.fretboard.set( 'tuningIndex', index );
 
         // Change current selected tuning.
-        this.options.tuningView.reset(
-          this.collection.at( index ).get( 'tuning' )
-        );
+        var tuning = this.options.tuning;
+        tuning.reset();
+        _.each( this.collection.at( index ).get( 'tuning' ).models, function( note ) {
+          tuning.add(new Note({
+            note: note.get( 'note' ),
+            octave: note.get( 'octave' )
+          }));
+        });
       }
     });
 

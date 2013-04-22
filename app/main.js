@@ -34,9 +34,10 @@ define(
         TuningView    = require( 'views/tuning-view' ),
         TuningsView   = require( 'views/tunings-view' );
 
-    var scales = new Scales();
-    var tunings = new Tunings();
-    var fretboard = new Fretboard();
+    var scales    = new Scales(),
+        tuning    = new Tuning(),
+        tunings   = new Tunings(),
+        fretboard = new Fretboard();
 
     var scalesView = new ScalesView({
       el: '#scales-view',
@@ -49,9 +50,17 @@ define(
      .then(function() {
         scalesView.render();
 
+        var defaultTuning = tunings.at(0).get( 'tuning' );
+        _.each( defaultTuning.models, function( note ) {
+          tuning.add(new Note({
+            note: note.get( 'note' ),
+            octave: note.get( 'octave' )
+          }));
+        });
+
         var tuningView = new TuningView({
           el : '#tuning-view',
-          model: tunings.at( fretboard.get( 'tuningIndex' ) )
+          collection: tuning
         });
 
         tuningView.render();
@@ -59,9 +68,9 @@ define(
 
         var tuningsView = new TuningsView({
           el: '#tunings-view',
+          tuning: tuning,
           collection: tunings,
-          fretboard: fretboard, // fretboard has a tuningIndex.
-          tuningView: tuningView
+          fretboard: fretboard // fretboard has a tuningIndex.
         });
 
         tuningsView.render();
@@ -70,8 +79,8 @@ define(
         var fretboardView = new FretboardView({
           el: '#fretboard-view',
           model: fretboard,
-          collection: tunings,
-          scales: scales
+          scales: scales,
+          tuning: tuning
         });
 
         fretboardView.render();

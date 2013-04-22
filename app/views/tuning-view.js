@@ -15,13 +15,12 @@ define(
           'add'
         );
 
-        var tuning = this.model.get( 'tuning' );
-        this.listenTo( tuning, 'add', this.render );
-        tuning.each( this.add );
+        this.listenTo( this.collection, 'all', this.render );
+        this.collection.each( this.add );
       },
 
       render: function() {
-        console.log( 'tuningView');
+        console.log( 'tuningView ' + this.collection.length );
         var that = this;
         // Reverse so that lowest string is at the bottom.
         _( _.clone( this.noteViews ).reverse() ).each(function( noteView ) {
@@ -37,21 +36,9 @@ define(
         }));
       },
 
-      clear: function() {
-        for ( var i = this.noteViews.length - 1; i >= 0; i-- ) {
-          this.noteViews[i].remove();
-        }
-
-        this.noteViews = [];
-      },
-
-      reset: function( models, options ) {
-        this.clear();
-
-        this.model = models;
-        this.model.each( this.add );
-
-        this.render();
+      // Remove last element.
+      pop: function() {
+        this.noteViews.pop().remove();
       }
     });
 

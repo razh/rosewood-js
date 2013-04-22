@@ -35,7 +35,6 @@ define(
           // E above middle C.
           root: new Note({ note: Note.E, octave: 4 }),
           scaleIndex: 0,
-          tuningIndex: 0,
 
           labelDistance: 15,
           labelFill: 'rgba( 72, 72, 72, 1.0 )',
@@ -86,10 +85,6 @@ define(
 
       scaleIndex: function() {
         return Backbone.Model.prototype.get.call( this, 'scaleIndex' ) || 0;
-      },
-
-      tuningIndex: function() {
-        return Backbone.Model.prototype.get.call( this, 'tuningIndex' ) || 0;
       }
     });
 

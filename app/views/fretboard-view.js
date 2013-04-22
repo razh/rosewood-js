@@ -16,13 +16,13 @@ define(
         $( document ).bind( 'keydown', this.onKeyDown );
 
         this.listenTo( this.model, 'change', this.render );
-        this.listenTo( this.collection, 'change', this.render );
+        this.listenTo( this.options.tuning, 'change', this.render );
       },
 
       render: function() {
         var model  = this.model,
-            tuning = this.collection.at( model.get( 'tuningIndex' ) ).get( 'tuning' ),
             scales = this.options.scales,
+            tuning = this.options.tuning,
             ctx    = this.$el.get(0).getContext( '2d' );
 
         ctx.fillStyle = model.get( 'backgroundColor' );
