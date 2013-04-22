@@ -16,7 +16,7 @@ define(
           foregroundColor: 'rgba(  27,  27,  27, 1.0 )',
 
           xOffset: 50,
-          yOffset: 50,
+          yOffset: 75,
 
           scaleLength: 1200,
           constantSpacing: false,
@@ -36,15 +36,20 @@ define(
           root: new Note({ note: Note.E, octave: 4 }),
           scaleIndex: 0,
 
-          noteFont: '7pt Helvetica, Verdana',
+          labelDistance: 15,
+          labelFill: 'rgba( 72, 72, 72, 1.0 )',
+          labelFont: 'bold 20pt Helvetica, Arial',
+          labelLength: 4,
+
+          markerFill: 'rgba( 72, 72, 72, 1.0 )',
+          markerFont: '7pt Helvetica, Arial',
+          markerRadius: 6,
+
+          noteFont: '7pt Helvetica, Arial',
           noteLineWidth: 2,
           noteRadius: 12,
           noteFills: [],
-          noteTextFills: [],
-
-          markerFill: 'rgba( 72, 72, 72, 1.0 )',
-          markerFont: '7pt Helvetica, Verdana',
-          markerRadius: 6
+          noteTextFills: []
         };
       },
 

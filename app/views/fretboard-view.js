@@ -6,7 +6,8 @@ define(
     'models/note' ],
   function( $, _, Backbone, Fretboard, Note ) {
 
-    var PI2 = 2 * Math.PI;
+    var PI2    = 2 * Math.PI,
+        SQRT_3 = Math.sqrt(3);
 
     var FretboardView = Backbone.View.extend({
 
@@ -35,6 +36,7 @@ define(
           drawNut,
           drawFrets,
           drawStrings,
+          drawLabels,
           drawMarkers
         ], function( func ) {
           func.call( this, ctx, model, tuning );
@@ -183,7 +185,51 @@ define(
     }
 
     function drawLabels( ctx, model, tuning ) {
-      var notePositions = model.get( 'notePositions' );
+      var notePositions = model.get( 'notePositions' ),
+
+          stringSpacing = model.get( 'stringSpacing' ),
+          stringCount   = tuning.length,
+          width         = stringSpacing * ( stringCount - 1 ),
+
+          labelDistance = model.get( 'labelDistance' ),
+          labelLength   = model.get( 'labelLength' ),
+
+          xOffset       = model.get( 'xOffset' ),
+          yOffset       = model.get( 'yOffset' );
+
+      var labelX, labelY,
+          x0, y0,
+          x1, y1,
+          x2, y2;
+
+      ctx.font = model.get( 'labelFont' );
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'bottom';
+      ctx.fillStyle = model.get( 'labelFill' );
+
+      labelY = yOffset - 2 * labelDistance;
+      y0 = labelY + 0.8 * labelDistance;
+      y1 = y0 - ( labelLength * SQRT_3 );
+      y2 = y1;
+
+      _.each( [ 3, 5, 7, 9, 12 ], function( fret ) {
+        labelX = xOffset + notePositions[ fret ];
+
+        x0 = labelX;
+        x1 = labelX - labelLength;
+        x2 = labelX + labelLength;
+
+        // Draw label triangles.
+        ctx.beginPath();
+        ctx.moveTo( x0, y0 );
+        ctx.lineTo( x1, y1 );
+        ctx.lineTo( x2, y2 );
+        ctx.fill();
+
+        // Draw label text.
+        ctx.fillText( fret, labelX, labelY );
+      });
+
     }
 
     function drawNotes( ctx, model, tuning, root, scale ) {

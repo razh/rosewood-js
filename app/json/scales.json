@@ -18,5 +18,9 @@
   {
     "name": "major-triad",
     "degrees": [ 0, 4, 7 ]
+  },
+  {
+    "name": "minor-triad",
+    "degrees": [ 0, 3, 7 ]
   }
 ]
