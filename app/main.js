@@ -33,21 +33,6 @@ define(
         ScalesView    = require( 'views/scales-view' ),
         TuningView    = require( 'views/tuning-view' );
 
-    var tuning = new Tuning();
-    tuning.add({ note: Note.E, octave: 2 });
-    tuning.add({ note: Note.A, octave: 2 });
-    tuning.add({ note: Note.D, octave: 3 });
-    tuning.add({ note: Note.G, octave: 3 });
-    tuning.add({ note: Note.B, octave: 3 });
-    tuning.add({ note: Note.E, octave: 4 });
-
-    var tuningView = new TuningView({
-      el: '#tuning-view',
-      collection: tuning
-    });
-
-    tuningView.render();
-
     var scales = new Scales();
     var fretboard = new Fretboard();
 
@@ -63,6 +48,12 @@ define(
     $.when( tunings.fetch(), scales.fetch() )
      .then(function() {
         scalesView.render();
+
+        var tuningView = new TuningView({
+          el : '#tuning-view',
+          collection: tunings.at( fretboard.get( 'tuningIndex' ) ).get( 'tuning' )
+        });
+        tuningView.render();
 
         var fretboardView = new FretboardView({
           el: '#fretboard-view',

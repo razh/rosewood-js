@@ -12,6 +12,13 @@ define(
           notes: [],
           tuning: new Tuning()
         };
+      },
+
+      // This model is changed if the underlying Tuning Collection is changed.
+      initialize: function() {
+        this.listenTo( this.get( 'tuning' ), 'change', function() {
+          this.trigger( 'change' );
+        });
       }
     });
 

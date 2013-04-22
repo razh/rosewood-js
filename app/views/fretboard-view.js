@@ -24,9 +24,6 @@ define(
             tuning = this.collection.at( model.get( 'tuningIndex' ) ).get( 'tuning' ),
             scales = this.options.scales,
             ctx    = this.$el.get(0).getContext( '2d' );
-            console.log( model.get( 'tuningIndex' ) + ', ' + this.collection.length );
-            console.log( this.collection.at( model.get( 'tuningIndex' ) ) ) ;
-            console.log( tuning );
 
         ctx.fillStyle = model.get( 'backgroundColor' );
         ctx.fillRect( 0, 0, ctx.canvas.width, ctx.canvas.height );
