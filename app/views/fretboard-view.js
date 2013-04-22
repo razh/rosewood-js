@@ -12,8 +12,10 @@ define(
 
       initialize: function() {
         _.bindAll( this, 'render', 'onKeyDown' );
-        this.model.bind( 'change', this.render );
+
         $( document ).bind( 'keydown', this.onKeyDown );
+
+        this.listenTo( this.model, 'change', this.render );
         this.listenTo( this.collection, 'change', this.render );
       },
 
@@ -23,14 +25,21 @@ define(
             scales = this.options.scales,
             ctx    = this.$el.get(0).getContext( '2d' );
 
-        clear( ctx );
+        ctx.fillStyle = model.get( 'backgroundColor' );
+        ctx.fillRect( 0, 0, ctx.canvas.width, ctx.canvas.height );
 
         ctx.strokeStyle = model.get( 'foregroundColor' );
 
-        drawBorder( ctx, model, tuning );
-        drawNut( ctx, model, tuning );
-        drawFrets( ctx, model, tuning );
-        drawStrings( ctx, model, tuning );
+        _.each( [
+          drawBorder,
+          drawNut,
+          drawFrets,
+          drawStrings,
+          drawMarkers
+        ], function( func ) {
+          func.call( this, ctx, model, tuning );
+        });
+
         drawNotes( ctx, model, tuning, model.get( 'root' ).get( 'note' ), scales.at( model.get( 'scaleIndex' ) ) );
       },
 
@@ -49,10 +58,6 @@ define(
         }
       }
     });
-
-    function clear( ctx ) {
-      ctx.clearRect( 0, 0, ctx.canvas.width, ctx.canvas.height );
-    }
 
     function drawBorder( ctx, model, tuning ) {
       var length        = model.get( 'length' ),
@@ -130,6 +135,55 @@ define(
       }
 
       ctx.stroke();
+    }
+
+    function drawMarkers( ctx, model, tuning ) {
+      var notePositions = model.get( 'notePositions' ),
+
+          stringSpacing = model.get( 'stringSpacing' ),
+          stringCount   = tuning.length,
+          width         = stringSpacing * ( stringCount - 1 ),
+
+          markerFill    = model.get( 'markerFill' ),
+          markerRadius  = model.get( 'markerRadius' ),
+
+          xOffset       = model.get( 'xOffset' ),
+          yOffset       = model.get( 'yOffset' ),
+          endFret       = model.get( 'endFret' );
+
+      ctx.fillStyle = markerFill;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+
+      var markerX, markerY;
+      _.each( [ 3, 5, 7, 9, 12 ], function( fret ) {
+        markerX = xOffset + notePositions[ fret ];
+
+        // Two markers for the 12th fret.
+        if ( fret === 12 ) {
+          markerY = yOffset + 0.5 * stringSpacing;
+        } else {
+          markerY = yOffset + 0.5 * width;
+        }
+
+        // Draw marker.
+        ctx.beginPath();
+        ctx.arc( markerX, markerY, markerRadius, 0, PI2, true );
+        ctx.fill();
+
+        // Second (bottom) marker for 12th fret.
+        if ( fret === 12 ) {
+          markerY = yOffset + ( stringCount - 1.5 ) * stringSpacing;
+
+          ctx.beginPath();
+          ctx.arc( markerX, markerY, markerRadius, 0, PI2, true );
+          ctx.fill();
+        }
+      });
+    }
+
+    function drawLabels( ctx, model, tuning ) {
+      var notePositions = model.get( 'notePositions' );
     }
 
     function drawNotes( ctx, model, tuning, root, scale ) {

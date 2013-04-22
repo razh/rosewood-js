@@ -10,8 +10,8 @@ define(
       template: _.template( noteTemplate ),
 
       events: {
-        'click .note.add': 'add',
-        'click .note.subtract': 'subtract'
+        'click .note-button.add': 'add',
+        'click .note-button.subtract': 'subtract'
       },
 
       initialize: function() {

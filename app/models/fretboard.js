@@ -38,7 +38,7 @@ define(
 
           noteFont: '7pt Helvetica, Verdana',
           noteLineWidth: 2,
-          noteRadius: 9,
+          noteRadius: 12,
           noteFills: [],
           noteTextFills: [],
 
