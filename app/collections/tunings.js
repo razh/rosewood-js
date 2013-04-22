@@ -16,8 +16,7 @@ define(
           }
 
           var tuningModels = [],
-              tuningModel = {},
-              tuning, notes, note;
+              tuningModel, tuning, notes, note;
           _.each( models, function( model ) {
             // Parse notes of each tuning.
             notes = [];

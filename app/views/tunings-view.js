@@ -26,12 +26,10 @@ define(
 
         // Change current selected tuning.
         var tuning = this.options.tuning;
-        tuning.reset();
-        _.each( this.collection.at( index ).get( 'tuning' ).models, function( note ) {
-          tuning.add(new Note({
-            note: note.get( 'note' ),
-            octave: note.get( 'octave' )
-          }));
+        _.each( this.collection.at( index ).get( 'tuning' ).models, function( note, i ) {
+          if ( i < tuning.length ) {
+            tuning.at(i).set( note );
+          }
         });
       }
     });

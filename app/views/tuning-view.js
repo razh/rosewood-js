@@ -36,6 +36,12 @@ define(
         }));
       },
 
+      addAll: function() {
+        // Our solution is similar to Addy Osmani's TodoMVC example.
+        this.$el.html( '' );
+        this.collection.each( this.add, this );
+      },
+
       // Remove last element.
       pop: function() {
         this.noteViews.pop().remove();
