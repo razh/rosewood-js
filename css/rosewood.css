@@ -1,12 +1,17 @@
-.note-view .note-input {
+.tuning-view .note-view .note-input {
   margin: 0 0 0 10px;
 }
 
-.note-button {
+.tuning-view .note-button {
   font-weight: bolder;
 }
 
-.note-toggle {
+.tonic-view {
+  position: relative;
+  float: left;
+}
+
+.tonic-view .note-toggle {
   float: left;
 
   font-size: 24px;
@@ -27,7 +32,19 @@
           user-select: none;
 }
 
-.selected {
+.tonic-view .note-a {
+  position: absolute;
+  top: 75px;
+  left: 45px;
+}
+
+.tonic-view .note-b {
+  position: absolute;
+  top: 75px;
+  left: 140px;
+}
+
+.tonic-view .selected {
   color: #FFF;
   background-color: #000;
 }
