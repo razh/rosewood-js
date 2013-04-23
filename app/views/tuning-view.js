@@ -20,10 +20,9 @@ define(
       },
 
       render: function() {
-        console.log( 'tuningView ' + this.collection.length );
         var that = this;
         // Reverse so that lowest string is at the bottom.
-        _( _.clone( this.noteViews ).reverse() ).each(function( noteView ) {
+        _( this.noteViews ).each(function( noteView ) {
           that.$el.append( noteView.render().el );
         });
 
@@ -31,15 +30,20 @@ define(
       },
 
       add: function( note ) {
-        this.noteViews.push(new NoteView({
+        // Add to front.
+        this.noteViews.splice( 0, 0, new NoteView({
           model: note
         }));
       },
 
       addAll: function() {
-        // Our solution is similar to Addy Osmani's TodoMVC example.
-        this.$el.html( '' );
         this.collection.each( this.add, this );
+      },
+
+      clear: function() {
+        while ( this.noteViews.length ) {
+          this.pop();
+        }
       },
 
       // Remove last element.

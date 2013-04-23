@@ -50,13 +50,7 @@ define(
      .then(function() {
         scalesView.render();
 
-        var defaultTuning = tunings.at(0).get( 'tuning' );
-        _.each( defaultTuning.models, function( note ) {
-          tuning.add(new Note({
-            note: note.get( 'note' ),
-            octave: note.get( 'octave' )
-          }));
-        });
+        tuning.setTuning( tunings.at(0).get( 'tuning' ) );
 
         var tuningView = new TuningView({
           el : '#tuning-view',
@@ -70,6 +64,7 @@ define(
           el: '#tunings-view',
           tuning: tuning,
           collection: tunings,
+          tuningView: tuningView,
           fretboard: fretboard // fretboard has a tuningIndex.
         });
 

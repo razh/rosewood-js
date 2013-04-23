@@ -9,7 +9,7 @@ define(
       template: _.template( tuningsTemplate ),
 
       events: {
-        'change': 'selectTuning'
+        'click': 'selectTuning'
       },
 
       initialize: function() {
@@ -21,16 +21,23 @@ define(
       },
 
       selectTuning: function() {
-        var index = this.$el.find( ':selected' ).val() || 0;
-        this.options.fretboard.set( 'tuningIndex', index );
+        var index = this.$el.find( ':selected' ).val();
+        if ( typeof index === 'undefined' ) {
+          return;
+        }
 
         // Change current selected tuning.
-        var tuning = this.options.tuning;
-        _.each( this.collection.at( index ).get( 'tuning' ).models, function( note, i ) {
-          if ( i < tuning.length ) {
-            tuning.at(i).set( note );
-          }
-        });
+        this.setTuning( this.collection.at( index ).get( 'tuning' ) );
+      },
+
+      setTuning: function( tuning ) {
+        this.options.tuning.setTuning( tuning );
+
+        // Update tuning view.
+        var tuningView = this.options.tuningView;
+        tuningView.clear();
+        tuningView.addAll();
+        tuningView.render();
       }
     });
 
