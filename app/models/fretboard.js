@@ -33,18 +33,21 @@ define(
           stringWidth: 2,
 
           // E above middle C.
-          root: new Note({ note: Note.E, octave: 4 }),
+          tonic: new Note({ note: Note.E, octave: 4 }),
           scaleIndex: 0,
 
+          // Label parameters.
           labelDistance: 15,
           labelFill: 'rgba( 72, 72, 72, 1.0 )',
           labelFont: 'bold 20pt Helvetica, Arial',
           labelLength: 4,
 
+          // Marker parameters.
           markerFill: 'rgba( 72, 72, 72, 1.0 )',
           markerFont: '7pt Helvetica, Arial',
           markerRadius: 6,
 
+          // Note parameters.
           noteFont: '7pt Helvetica, Arial',
           noteLineWidth: 2,
           noteRadius: 12,
@@ -59,8 +62,8 @@ define(
         this.set( 'noteFills', noteFills( this ) );
         this.set( 'noteTextFills', noteTextFills( this ) );
 
-        // Trigger a change if the root is changed.
-        this.listenTo( this.get( 'root' ), 'change', function() {
+        // Trigger a change if the tonic is changed.
+        this.listenTo( this.get( 'tonic' ), 'change', function() {
           this.trigger( 'change' );
         });
       },

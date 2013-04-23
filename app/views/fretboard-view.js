@@ -41,7 +41,7 @@ define(
           fn.call( this, ctx, model, tuning );
         });
 
-        drawNotes( ctx, model, tuning, model.get( 'root' ).get( 'note' ), scales.at( model.get( 'scaleIndex' ) ) );
+        drawNotes( ctx, model, tuning, model.get( 'tonic' ).get( 'note' ), scales.at( model.get( 'scaleIndex' ) ) );
       },
 
       onKeyDown: function( event ) {
@@ -49,12 +49,12 @@ define(
         switch ( event.which ) {
           // [.
           case 219:
-            model.get( 'root' ).set( 'note', model.get( 'root' ).transpose(-1) );
+            model.get( 'tonic' ).set( 'note', model.get( 'tonic' ).transpose(-1) );
             break;
 
           // ].
           case 221:
-            model.get( 'root' ).set( 'note', model.get( 'root' ).transpose(1) );
+            model.get( 'tonic' ).set( 'note', model.get( 'tonic' ).transpose(1) );
             break;
         }
       }
@@ -230,7 +230,7 @@ define(
       });
     }
 
-    function drawNotes( ctx, model, tuning, root, scale ) {
+    function drawNotes( ctx, model, tuning, tonic, scale ) {
       var note,
           noteX, noteY,
           scaleDegree,
@@ -263,7 +263,7 @@ define(
         for ( var j = startFret; j <= endFret; j++ ) {
           note = tuning.at(i).transpose(j);
           // Add twelve to avoid negative notes.
-          scaleDegree = ( note - root + 12 ) % 12;
+          scaleDegree = ( note - tonic + 12 ) % 12;
 
           // Only render the note if it is in scale.
           if ( _.indexOf( scaleDegrees, scaleDegree, true ) === -1 ) {
