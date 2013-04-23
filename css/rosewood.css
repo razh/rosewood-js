@@ -11,6 +11,14 @@
   float: left;
 }
 
+.tonic-view .black-keys {
+  margin-left: 27.5px;
+}
+
+.tonic-view .white-keys {
+  float: right;
+}
+
 .tonic-view .note-toggle {
   float: left;
 
@@ -30,18 +38,6 @@
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-}
-
-.tonic-view .note-a {
-  position: absolute;
-  top: 75px;
-  left: 45px;
-}
-
-.tonic-view .note-b {
-  position: absolute;
-  top: 75px;
-  left: 140px;
 }
 
 .tonic-view .selected {
