@@ -40,6 +40,12 @@ define(
         this.collection.each( this.add, this );
       },
 
+      refresh: function() {
+        this.clear();
+        this.addAll();
+        this.render();
+      },
+
       clear: function() {
         while ( this.noteViews.length ) {
           this.pop();

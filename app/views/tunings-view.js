@@ -9,7 +9,7 @@ define(
       template: _.template( tuningsTemplate ),
 
       events: {
-        'click': 'selectTuning'
+        'change': 'selectTuning'
       },
 
       initialize: function() {
@@ -27,17 +27,8 @@ define(
         }
 
         // Change current selected tuning.
-        this.setTuning( this.collection.at( index ).get( 'tuning' ) );
-      },
-
-      setTuning: function( tuning ) {
-        this.options.tuning.setTuning( tuning );
-
-        // Update tuning view.
-        var tuningView = this.options.tuningView;
-        tuningView.clear();
-        tuningView.addAll();
-        tuningView.render();
+        this.options.tuning.setTuning( this.collection.at( index ).get( 'tuning' ) );
+        this.options.tuningView.refresh();
       }
     });
 

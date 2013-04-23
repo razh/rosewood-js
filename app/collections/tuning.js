@@ -16,9 +16,7 @@ define(
           }
         } else if ( difference < 0 ) {
           while ( difference++ ) {
-            model = this.last();
-            model.destroy();
-            this.remove( model );
+            this.first().destroy();
           }
         }
 
