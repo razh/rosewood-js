@@ -17,7 +17,7 @@ define(
       initialize: function() {
         _.bindAll( this, 'render' );
         this.model.bind( 'change', this.render );
-        this.previousValidValue = this.model.toString().replace( '\u266F', '#' );
+        this.previousValidValue = this.model.toString();
       },
 
       render: function() {
@@ -31,8 +31,6 @@ define(
 
         // Only validate input on Enter.
         if ( event.which === 13 ) {
-          // Replace Unicode value with something the regex can detect.
-          value = value.replace( '\u266F', '#' );
 
           // Only update if the new value is a valid note.
           // We do this by testing against the regex and comparing the matched
@@ -45,8 +43,6 @@ define(
             $inputElement.val( this.previousValidValue );
           }
         }
-
-        $inputElement.focus();
       },
 
       add: function() {

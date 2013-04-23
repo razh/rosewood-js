@@ -26,16 +26,16 @@ define(
             octave = this.get( 'octave' );
 
         // Limit note.
-        if ( note <= 0 && octave === 0 ) {
+        if ( note <= 0 && octave === Note.MIN_OCTAVE ) {
           note = 0;
-        } else if ( note > 11 && octave === 10 ) {
+        } else if ( note > 11 && octave === Note.MAX_OCTAVE ) {
           note = 11;
         }
 
         // Calculate number of octaves we need to shift.
         var octaves = Math.floor( note / 12 );
         octave += octaves;
-        octave = Math.min( Math.max( octave, 0 ), 10 );
+        octave = Math.min( Math.max( octave, Note.MIN_OCTAVE ), Note.MAX_OCTAVE );
 
         // Make sure note is in [0, 11].
         note %= 12;
@@ -66,13 +66,13 @@ define(
             octave     = symbols[3] || 0;
 
         var note = Note.names.indexOf( name );
-        if ( accidental === '#' ) {
+        if ( accidental === '#' || accidental === '\u266f' ) {
           note++;
-        } else if ( accidental === 'b' ) {
+        } else if ( accidental === 'b' || accidental === '\u266d' ) {
           note--;
         }
 
-        octave = Math.min( Math.max( octave, 0 ), 10 ); // Clamp octave.
+        octave = Math.min( Math.max( octave, Note.MIN_OCTAVE ), Note.MAX_OCTAVE ); // Clamp octave.
 
         return this.set({
           note: note,
@@ -85,9 +85,12 @@ define(
       return new Note().fromString( string );
     };
 
+    Note.MIN_OCTAVE = 0;
+    Note.MAX_OCTAVE = 9;
+
     Note.names = [ "C", "C\u266F", "D", "D\u266F", "E", "F", "F\u266F", "G", "G\u266F", "A", "A\u266F", "B" ];
     //Splits full note into note name, accidental, and octave (from 0 to 11).
-    Note.regex = /(^[A-G])(\#|b)?((10|11|[0-9])?$)/;
+    Note.regex = /(^[A-G])(b|\#|\u266d|\u266f)?([0-9]?$)/;
 
     Note.C       =  0;
     Note.C_SHARP =  1;
