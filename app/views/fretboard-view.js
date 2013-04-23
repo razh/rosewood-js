@@ -45,16 +45,16 @@ define(
       },
 
       onKeyDown: function( event ) {
-        var model = this.model;
+        var tonic = this.model.get( 'tonic' );
         switch ( event.which ) {
           // [.
           case 219:
-            model.get( 'tonic' ).set( 'note', model.get( 'tonic' ).transpose(-1) );
+            tonic.set( 'note', tonic.transpose(-1) );
             break;
 
           // ].
           case 221:
-            model.get( 'tonic' ).set( 'note', model.get( 'tonic' ).transpose(1) );
+            tonic.set( 'note', tonic.transpose(1) );
             break;
         }
       }
