@@ -6,17 +6,14 @@
   font-weight: bolder;
 }
 
-.tonic-view {
-  position: relative;
-  float: left;
+.tonic-view .black-keys .first-group {
+  display: inline-block;
+  margin-left: 30px;
 }
 
-.tonic-view .black-keys {
-  margin-left: 27.5px;
-}
-
-.tonic-view .white-keys {
-  float: right;
+.tonic-view .black-keys .second-group {
+  display: inline-block;
+  margin-left: 60px;
 }
 
 .tonic-view .note-toggle {
@@ -26,6 +23,8 @@
 
   width: 50px;
   height: 50px;
+
+  margin-left: 5px;
 
   border: 5px solid #000;
   border-radius: 50%;
