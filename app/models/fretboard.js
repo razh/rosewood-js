@@ -82,10 +82,6 @@ define(
         return fretPositions[ fretPositions.length - 1 ] - fretPositions[0];
       },
 
-      xStart: function() {
-        return this.get( 'fretPositions' )[0];
-      },
-
       scaleIndex: function() {
         return Backbone.Model.prototype.get.call( this, 'scaleIndex' ) || 0;
       }

@@ -14,7 +14,13 @@
 }
 
 .tonic-view {
-  margin-left: 50px;
+  margin-left: 60px;
+
+    /* Prevent note from being selected. */
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .tonic-view .black-keys .first-group {
@@ -35,19 +41,13 @@
   min-width: 50px;
   min-height: 50px;
 
-  margin-left: 5px;
+  margin-right: 5px;
 
   border: 5px solid #000;
   border-radius: 50%;
 
   text-align: center;
   line-height: 50px;
-
-  /* Prevent note from being selected. */
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
 }
 
 .tonic-view .selected {

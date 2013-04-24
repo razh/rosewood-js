@@ -1,6 +1,6 @@
 define(
   [ 'jquery',
-  'underscore',
+    'underscore',
     'backbone',
     'text!templates/tonic-view.html' ],
   function( $, _, Backbone, tonicTemplate ) {
