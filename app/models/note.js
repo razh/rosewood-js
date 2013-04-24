@@ -89,7 +89,7 @@ define(
     Note.MAX_OCTAVE = 9;
 
     Note.names = [ "C", "C\u266F", "D", "D\u266F", "E", "F", "F\u266F", "G", "G\u266F", "A", "A\u266F", "B" ];
-    //Splits full note into note name, accidental, and octave (from 0 to 11).
+    //Splits full note into note name, accidental, and octave (from 0 to 9).
     Note.regex = /(^[A-G])(b|\#|\u266d|\u266f)?([0-9]?$)/;
 
     Note.C       =  0;

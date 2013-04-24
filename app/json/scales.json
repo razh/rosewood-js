@@ -26,5 +26,9 @@
   {
     "name": "minor-triad",
     "degrees": [ 0, 3, 7 ]
+  },
+  {
+    "name": "diminished-triad",
+    "degrees": [ 0, 3, 6 ]
   }
 ]
