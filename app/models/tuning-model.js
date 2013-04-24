@@ -19,6 +19,11 @@ define(
         this.listenTo( this.get( 'tuning' ), 'change', function() {
           this.trigger( 'change' );
         });
+      },
+
+      // Icky doing this, but we should expose it.
+      getNoteNames: function() {
+        return this.get( 'tuning' ).getNoteNames();
       }
     });
 

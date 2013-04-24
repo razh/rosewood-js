@@ -51,8 +51,12 @@ define(
         return this;
       },
 
+      getNoteName: function() {
+        return Note.names[ this.get( 'note' ) ];
+      },
+
       toString: function() {
-        return Note.names[ this.get( 'note' ) ] +  this.get( 'octave' );
+        return this.getNoteName() + this.get( 'octave' );
       },
 
       fromString: function( string ) {

@@ -10,14 +10,23 @@
   <body>
     <canvas id="fretboard-view" width="720" height="256"></canvas>
 
-    <div class="container">
+    <div class="row">
       <div class="tonic-view" id="tonic-view"></div>
     </div>
 
-    <div class="container">
-      <div class="tuning-view" id="tuning-view"></div>
-      <div class="tunings-view" id="tunings-view"></div>
-      <div class="scales-view" id="scales-view"></div>
+    <div class="row">
+      <div class="tuning span2">
+        <div class="view-label">Tuning</div>
+        <div class="tuning-view" id="tuning-view"></div>
+      </div>
+      <div class="tunings span3">
+        <div class="view-label">Tunings</div>
+        <div class="tunings-view" id="tunings-view"></div>
+      </div>
+      <div class="scales span3">
+        <div class="view-label">Scales</div>
+        <div class="scales-view" id="scales-view"></div>
+      </div>
     </div>
 
     <script data-main="app/main" src="app/require.js"></script>

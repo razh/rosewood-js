@@ -29,6 +29,16 @@ define(
             octave: note.get( 'octave' )
           });
         });
+      },
+
+      getNoteNames: function() {
+        var notes = '';
+
+        this.each(function( note ) {
+          notes += note.getNoteName();
+        });
+
+        return notes;
       }
     });
 
