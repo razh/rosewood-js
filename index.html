@@ -8,28 +8,29 @@
     <link rel="stylesheet" type="text/css" href="css/rosewood.css">
   </head>
   <body>
-    <canvas id="fretboard-view" width="720" height="256"></canvas>
+    <div class="container">
+      <canvas id="fretboard-view" width="720" height="256"></canvas>
 
-    <div class="row">
-      <div class="tonic-view" id="tonic-view"></div>
+      <div class="row">
+        <div class="tonic-view" id="tonic-view"></div>
+      </div>
+
+      <div class="row">
+        <div class="tuning span2">
+          <h4 class="view-label">Tuning</h4>
+          <div class="tuning-view" id="tuning-view"></div>
+        </div>
+        <div class="tunings span3">
+          <h4 class="view-label">Tunings</h4>
+          <div class="tunings-view" id="tunings-view"></div>
+        </div>
+        <div class="scales span3">
+          <h4 class="view-label">Scales</h4>
+          <div class="scale-view" id="scale-view"></div>
+          <div class="scales-view" id="scales-view"></div>
+        </div>
+      </div>
     </div>
-
-    <div class="row">
-      <div class="tuning span2">
-        <h4 class="view-label">Tuning</h4>
-        <div class="tuning-view" id="tuning-view"></div>
-      </div>
-      <div class="tunings span3">
-        <h4 class="view-label">Tunings</h4>
-        <div class="tunings-view" id="tunings-view"></div>
-      </div>
-      <div class="scales span3">
-        <h4 class="view-label">Scales</h4>
-        <div class="scale-view" id="scale-view"></div>
-        <div class="scales-view" id="scales-view"></div>
-      </div>
-    </div>
-
     <script data-main="app/main" src="app/require.js"></script>
   </body>
 </html>
