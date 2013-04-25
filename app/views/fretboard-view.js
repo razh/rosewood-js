@@ -21,7 +21,7 @@ define(
 
       render: function() {
         var model  = this.model,
-            scales = this.options.scales,
+            scale  = this.options.scale,
             tuning = this.options.tuning,
             ctx    = this.$el.get(0).getContext( '2d' );
 
@@ -41,7 +41,7 @@ define(
           fn.call( this, ctx, model, tuning );
         });
 
-        drawNotes( ctx, model, tuning, model.get( 'tonic' ).get( 'note' ), scales.at( model.get( 'scaleIndex' ) ) );
+        drawNotes( ctx, model, tuning, model.get( 'tonic' ).get( 'note' ), scale );
       },
 
       onKeyDown: function( event ) {

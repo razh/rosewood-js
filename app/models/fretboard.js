@@ -34,7 +34,6 @@ define(
 
           // E above middle C.
           tonic: new Note({ note: Note.E, octave: 4 }),
-          scaleIndex: 0,
 
           // Label parameters.
           labelDistance: 15,
@@ -80,10 +79,6 @@ define(
       length: function() {
         var fretPositions = this.get( 'fretPositions' );
         return fretPositions[ fretPositions.length - 1 ] - fretPositions[0];
-      },
-
-      scaleIndex: function() {
-        return Backbone.Model.prototype.get.call( this, 'scaleIndex' ) || 0;
       }
     });
 

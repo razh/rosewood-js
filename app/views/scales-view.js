@@ -21,7 +21,11 @@ define(
 
       selectScale: function() {
         var index = this.$el.find( ':selected' ).val();
-        this.options.fretboard.set( 'scaleIndex', index );
+        if ( typeof index === 'undefined' ) {
+          return;
+        }
+
+        this.model.set( 'degrees', this.collection.at( index ).get( 'degrees' ) );
       }
     });
 
