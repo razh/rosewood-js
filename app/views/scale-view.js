@@ -9,7 +9,7 @@ define(
       template: _.template( scaleTemplate ),
 
       events: {
-        'click .scale-degree-toggle': 'toggleScaleDegree'
+        'click .scale-degree': 'toggleScaleDegree'
       },
 
       initialize: function() {
