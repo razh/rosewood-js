@@ -14,7 +14,7 @@ define(
 
       initialize: function() {
         _.bindAll( this, 'render' );
-        this.model.bind( 'change', this.render );
+        this.listenTo( this.model, 'change', this.render );
       },
 
       render: function() {
