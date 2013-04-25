@@ -9,7 +9,7 @@ define(
       template: _.template( tonicTemplate ),
 
       events: {
-        'click .note-toggle': 'toggleNote'
+        'click .note.toggle': 'toggleNote'
       },
 
       initialize: function() {
