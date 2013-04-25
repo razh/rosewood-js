@@ -10,7 +10,9 @@
 .view-label {
   text-align: center;
   margin-top: 30px;
+  margin-bottom: 15px;
 }
+
 
 .tuning {
   margin-left: 60px;
@@ -24,29 +26,43 @@
   font-weight: bolder;
 }
 
-.tonic-view {
-  margin-left: 130px;
 
-    /* Prevent note from being selected. */
+/* Piano style views */
+.scale-view,
+.tonic-view {
+  /* Prevent note from being selected. */
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
 }
 
-.tonic-view .black-keys .first-group {
+.first-group,
+.second-group {
   display: inline-block;
+}
+
+.toggle {
+  float: left;
+  text-align: center;
+  border-radius: 50%;
+}
+
+/* Tonic view */
+.tonic-view {
+  margin-left: 130px;
+}
+
+.tonic-view .black-keys .first-group {
   margin-left: 30px;
 }
 
 .tonic-view .black-keys .second-group {
-  display: inline-block;
   margin-left: 60px;
 }
 
-.tonic-view .note-toggle {
-  float: left;
 
+.tonic-view .note {
   font-size: 24px;
 
   min-width: 50px;
@@ -55,15 +71,35 @@
   margin-right: 5px;
 
   border: 5px solid black;
-  border-radius: 50%;
-
-  text-align: center;
   line-height: 50px;
 }
 
 .tonic-view .selected {
   color: white;
   background-color: black;
+}
+
+
+/* Scale view */
+.scale-view .black-keys .first-group {
+  margin-left: 15px;
+}
+
+.scale-view .black-keys .second-group {
+  margin-left: 20px;
+}
+
+
+.scale-view .scale-degree {
+  font-size: 16px;
+
+  min-width: 25px;
+  min-height: 25px;
+
+  margin-right: 2px;
+
+  border: 2px solid black;
+  line-height: 25px;
 }
 
 .scale-view .selected {

@@ -19,7 +19,7 @@ define(
 
       render: function() {
         // Render template and get its children.
-        var children = this.$el.html( this.template() ).find( '.scale-degree-toggle' );
+        var children = this.$el.html( this.template() ).find( '.scale-degree' );
 
         var scaleDegrees = this.model.get( 'degrees' );
         children.each(function( index, child ) {
