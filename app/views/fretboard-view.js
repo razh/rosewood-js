@@ -16,6 +16,7 @@ define(
         $( document ).bind( 'keydown', this.onKeyDown );
 
         this.listenTo( this.model, 'change', this.render );
+        this.listenTo( this.options.scale, 'change', this.render );
         this.listenTo( this.options.tuning, 'change', this.render );
       },
 
