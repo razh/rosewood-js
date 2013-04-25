@@ -1,13 +1,10 @@
 define(
   [ 'underscore',
     'backbone',
-    'views/note-view',
-    'text!templates/tuning-view.html' ],
-  function( _, Backbone, NoteView, tuningTemplate  ) {
+    'views/note-view' ],
+  function( _, Backbone, NoteView  ) {
 
     var TuningView = Backbone.View.extend({
-      template: _.template( tuningTemplate ),
-
       initialize: function() {
         this.noteViews = [];
         _.bindAll( this,

@@ -8,6 +8,18 @@
     "notes": [ "D2", "A2", "D3", "G3", "B3", "E4" ]
   },
   {
+    "name": "Open C",
+    "notes": [ "C2", "G2", "C3", "G3", "C4", "E4" ]
+  },
+  {
+    "name": "Open G",
+    "notes": [ "D2", "G2", "D3", "G3", "B3", "D4" ]
+  },
+  {
+    "name": "Open D",
+    "notes": [ "D2", "A2", "D3", "F#3", "A3", "D4" ]
+  },
+  {
     "name": "Open Dsus4",
     "notes": [ "D2", "A2", "D3", "G3", "A3", "D4" ]
   },

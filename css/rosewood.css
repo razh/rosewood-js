@@ -106,3 +106,8 @@
   color: white;
   background-color: black;
 }
+
+/* Scales view. */
+.scales-view {
+  margin-top: 50px;
+}

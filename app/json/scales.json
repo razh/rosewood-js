@@ -30,5 +30,17 @@
   {
     "name": "diminished-triad",
     "degrees": [ 0, 3, 6 ]
+  },
+  {
+    "name": "augmented-triad",
+    "degrees": [ 0, 4, 8 ]
+  },
+  {
+    "name": "sus2-triad",
+    "degrees": [ 0, 2, 7 ]
+  },
+  {
+    "name": "sus4-triad",
+    "degrees": [ 0, 5, 7 ]
   }
 ]

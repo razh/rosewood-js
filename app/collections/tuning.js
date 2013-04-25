@@ -31,11 +31,15 @@ define(
         });
       },
 
-      getNoteNames: function() {
+      getNoteNames: function( separator ) {
         var notes = '';
 
-        this.each(function( note ) {
+        var that = this;
+        this.each(function( note, index ) {
           notes += note.getNoteName();
+          if ( separator && index < that.length - 1 ) {
+            notes += separator;
+          }
         });
 
         return notes;

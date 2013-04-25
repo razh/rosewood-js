@@ -22,8 +22,8 @@ define(
       },
 
       // Icky doing this, but we should expose it.
-      getNoteNames: function() {
-        return this.get( 'tuning' ).getNoteNames();
+      getNoteNames: function( separator ) {
+        return this.get( 'tuning' ).getNoteNames( separator );
       }
     });
 
