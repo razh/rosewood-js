@@ -1,83 +1,113 @@
 /* Change bootstrap defaults. */
 .container {
-  width: 720px; }
+  width: 720px;
+}
 
 .test {
-  background-color: red; }
+  background-color: red;
+}
 
 .view-label {
   text-align: center;
   margin-top: 30px;
-  margin-bottom: 15px; }
+  margin-bottom: 15px;
+}
+
 
 .tuning {
-  margin-left: 60px; }
+  margin-left: 60px;
+}
 
 .tuning-view .note-view {
-  margin: 0; }
+  margin: 0;
+}
 
 .tuning-view .note-button {
-  font-weight: bolder; }
+  font-weight: bolder;
+}
+
 
 /* Piano style views */
 .scale-view,
 .tonic-view {
   /* Prevent note from being selected. */
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none; }
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
 
 .first-group,
 .second-group {
-  display: inline-block; }
+  display: inline-block;
+}
 
 .toggle {
   float: left;
   text-align: center;
-  border-radius: 50%; }
+  border-radius: 50%;
+}
 
 /* Tonic view */
 .tonic-view {
-  margin-left: 130px; }
+  margin-left: 130px;
+}
 
 .tonic-view .black-keys .first-group {
-  margin-left: 30px; }
+  margin-left: 30px;
+}
 
 .tonic-view .black-keys .second-group {
-  margin-left: 60px; }
+  margin-left: 60px;
+}
+
 
 .tonic-view .note {
   font-size: 24px;
+
   min-width: 50px;
   min-height: 50px;
+
   margin-right: 5px;
+
   border: 5px solid black;
-  line-height: 50px; }
+  line-height: 50px;
+}
 
 .tonic-view .selected {
   color: white;
-  background-color: black; }
+  background-color: black;
+}
+
 
 /* Scale view */
 .scale-view .black-keys .first-group {
-  margin-left: 15px; }
+  margin-left: 15px;
+}
 
 .scale-view .black-keys .second-group {
-  margin-left: 20px; }
+  margin-left: 20px;
+}
+
 
 .scale-view .scale-degree {
   font-size: 16px;
+
   min-width: 25px;
   min-height: 25px;
+
   margin-right: 2px;
+
   border: 2px solid black;
-  line-height: 25px; }
+  line-height: 25px;
+}
 
 .scale-view .selected {
   color: white;
-  background-color: black; }
+  background-color: black;
+}
 
 /* Scales view. */
 .scales-view {
-  margin-top: 50px; }
+  margin-top: 50px;
+}
