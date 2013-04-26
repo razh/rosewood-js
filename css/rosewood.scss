@@ -1,5 +1,5 @@
 $width: 720px;
-$spacing: 50px;
+$spacing: 25px;
 
 // Distances from left side of container.
 $x-offset: 60px;
@@ -42,6 +42,10 @@ footer {
   .note-button {
     font-weight: bolder;
   }
+}
+
+.controls {
+  margin-top: $spacing;
 }
 
 /* Piano style views */
@@ -94,7 +98,10 @@ footer {
 /* Tonic view */
 .tonic-view {
   // 16 is apparently the number of spaces that centers the tonic view.
-  margin-left: 0.5 * ($width - 7 * $tonic-note-size - 16 * $tonic-note-spacing);
+  margin: {
+    left: 0.5 * ($width - 7 * $tonic-note-size - 16 * $tonic-note-spacing);
+    top: $spacing;
+  }
 
   .black-keys {
     @include black-keys($tonic-note-size, $tonic-note-spacing, $tonic-note-font-size);
@@ -117,5 +124,5 @@ footer {
 
 /* Scales view. */
 .scales-view {
-  margin-top: $spacing;
+  margin-top: 2 * $spacing;
 }
