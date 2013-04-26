@@ -12,7 +12,7 @@ define(
 
           fretCount: 12,
 
-          backgroundColor: 'rgba( 250, 250, 250, 1.0 )',
+          backgroundColor: 'rgba( 255, 255, 255, 1.0 )',
           foregroundColor: 'rgba(  27,  27,  27, 1.0 )',
 
           xOffset: 50,
