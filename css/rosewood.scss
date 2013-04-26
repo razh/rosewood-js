@@ -1,31 +1,36 @@
 /* Change bootstrap defaults. */
-.container {
-  width: 720px;
-}
+$width: 720px;
+$spacing: 50px;
 
-.test {
-  background-color: red;
+// Distances from left side of container.
+$x-offset: 60px;
+
+$tonic-note-size: 50px;
+$tonic-note-font-size: 25px;
+$tonic-note-spacing: 5px;
+
+$scale-degree-size: 25px;
+$scale-degree-font-size: 16px;
+$scale-degree-spacing: 2px;
+
+.container {
+  width: $width;
 }
 
 .view-label {
   text-align: center;
-  margin-top: 30px;
-  margin-bottom: 15px;
 }
-
 
 .tuning {
-  margin-left: 60px;
-}
+  margin-left: $x-offset;
 
-.tuning-view .note-view {
-  margin: 0;
+  .note-view {
+    margin: 0;
+  }
+  .note-button {
+    font-weight: bolder;
+  }
 }
-
-.tuning-view .note-button {
-  font-weight: bolder;
-}
-
 
 /* Piano style views */
 .scale-view,
@@ -42,72 +47,63 @@
   display: inline-block;
 }
 
+.selected {
+  color: white;
+  background-color: black;
+}
+
 .toggle {
   float: left;
   text-align: center;
   border-radius: 50%;
 }
 
+@mixin toggle($size, $spacing, $font-size) {
+  font-size: $font-size;
+
+  min-width: $size;
+  min-height: $size;
+
+  margin-right: $spacing;
+
+  border: $spacing solid black;
+  line-height: $size;
+}
+
+@mixin black-keys($size, $spacing, $font-size) {
+  .first-group {
+    margin-left: 0.5 * $size + $spacing;
+  }
+  .second-group {
+    margin-left: $size + 2 * $spacing;
+  }
+}
+
 /* Tonic view */
 .tonic-view {
-  margin-left: 130px;
-}
+  /* 20 = 7 borders * 2 sides + 6 spaces. */
+  margin-left: 0.5 * ($width - 7 * $tonic-note-size - 20 * $tonic-note-spacing);
 
-.tonic-view .black-keys .first-group {
-  margin-left: 30px;
+  .black-keys {
+    @include black-keys($tonic-note-size, $tonic-note-spacing, $tonic-note-font-size);
+  }
 }
-
-.tonic-view .black-keys .second-group {
-  margin-left: 60px;
-}
-
 
 .tonic-view .note {
-  font-size: 24px;
-
-  min-width: 50px;
-  min-height: 50px;
-
-  margin-right: 5px;
-
-  border: 5px solid black;
-  line-height: 50px;
-}
-
-.tonic-view .selected {
-  color: white;
-  background-color: black;
+  @include toggle($tonic-note-size, $tonic-note-spacing, $tonic-note-font-size);
 }
 
 
 /* Scale view */
-.scale-view .black-keys .first-group {
-  margin-left: 15px;
+.scale-view {
+  @include black-keys($scale-degree-size, $scale-degree-spacing, $scale-degree-font-size);
 }
-
-.scale-view .black-keys .second-group {
-  margin-left: 20px;
-}
-
 
 .scale-view .scale-degree {
-  font-size: 16px;
-
-  min-width: 25px;
-  min-height: 25px;
-
-  margin-right: 2px;
-
-  border: 2px solid black;
-  line-height: 25px;
-}
-
-.scale-view .selected {
-  color: white;
-  background-color: black;
+  @include toggle($scale-degree-size, $scale-degree-spacing, $scale-degree-font-size);
 }
 
 /* Scales view. */
 .scales-view {
-  margin-top: 50px;
+  margin-top: $spacing;
 }

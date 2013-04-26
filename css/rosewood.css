@@ -2,22 +2,15 @@
 .container {
   width: 720px; }
 
-.test {
-  background-color: red; }
-
 .view-label {
-  text-align: center;
-  margin-top: 30px;
-  margin-bottom: 15px; }
+  text-align: center; }
 
 .tuning {
   margin-left: 60px; }
-
-.tuning-view .note-view {
-  margin: 0; }
-
-.tuning-view .note-button {
-  font-weight: bolder; }
+  .tuning .note-view {
+    margin: 0; }
+  .tuning .note-button {
+    font-weight: bolder; }
 
 /* Piano style views */
 .scale-view,
@@ -32,6 +25,10 @@
 .second-group {
   display: inline-block; }
 
+.selected {
+  color: white;
+  background-color: black; }
+
 .toggle {
   float: left;
   text-align: center;
@@ -39,32 +36,26 @@
 
 /* Tonic view */
 .tonic-view {
-  margin-left: 130px; }
-
-.tonic-view .black-keys .first-group {
-  margin-left: 30px; }
-
-.tonic-view .black-keys .second-group {
-  margin-left: 60px; }
+  /* 20 = 7 borders * 2 sides + 6 spaces. */
+  margin-left: 135px; }
+  .tonic-view .black-keys .first-group {
+    margin-left: 30px; }
+  .tonic-view .black-keys .second-group {
+    margin-left: 60px; }
 
 .tonic-view .note {
-  font-size: 24px;
+  font-size: 25px;
   min-width: 50px;
   min-height: 50px;
   margin-right: 5px;
   border: 5px solid black;
   line-height: 50px; }
 
-.tonic-view .selected {
-  color: white;
-  background-color: black; }
-
 /* Scale view */
-.scale-view .black-keys .first-group {
-  margin-left: 15px; }
-
-.scale-view .black-keys .second-group {
-  margin-left: 20px; }
+.scale-view .first-group {
+  margin-left: 14.5px; }
+.scale-view .second-group {
+  margin-left: 29px; }
 
 .scale-view .scale-degree {
   font-size: 16px;
@@ -73,10 +64,6 @@
   margin-right: 2px;
   border: 2px solid black;
   line-height: 25px; }
-
-.scale-view .selected {
-  color: white;
-  background-color: black; }
 
 /* Scales view. */
 .scales-view {
