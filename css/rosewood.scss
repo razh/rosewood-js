@@ -81,8 +81,8 @@ $scale-degree-spacing: 2px;
 
 /* Tonic view */
 .tonic-view {
-  /* 20 = 7 borders * 2 sides + 6 spaces. */
-  margin-left: 0.5 * ($width - 7 * $tonic-note-size - 20 * $tonic-note-spacing);
+  // 16 is apparently the number of spaces that centers the tonic view.
+  margin-left: 0.5 * ($width - 7 * $tonic-note-size - 16 * $tonic-note-spacing);
 
   .black-keys {
     @include black-keys($tonic-note-size, $tonic-note-spacing, $tonic-note-font-size);

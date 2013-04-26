@@ -36,8 +36,7 @@
 
 /* Tonic view */
 .tonic-view {
-  /* 20 = 7 borders * 2 sides + 6 spaces. */
-  margin-left: 135px; }
+  margin-left: 145px; }
   .tonic-view .black-keys .first-group {
     margin-left: 30px; }
   .tonic-view .black-keys .second-group {
