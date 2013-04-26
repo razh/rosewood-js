@@ -5,6 +5,7 @@ define(
     'collections/tuning',
     'models/tuning-model' ],
   function( _, Backbone, Note, Tuning, TuningModel ) {
+    'use strict';
 
     var Tunings = Backbone.Collection.extend({
       model: TuningModel,

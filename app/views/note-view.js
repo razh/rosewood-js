@@ -4,6 +4,7 @@ define(
     'models/note',
     'text!templates/note-view.html' ],
   function( _, Backbone, Note, noteTemplate ) {
+    'use strict';
 
     var NoteView = Backbone.View.extend({
       template: _.template( noteTemplate ),

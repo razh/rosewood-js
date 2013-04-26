@@ -5,6 +5,7 @@ define(
     'models/fretboard',
     'models/note' ],
   function( $, _, Backbone, Fretboard, Note ) {
+    'use strict';
 
     var PI2 = 2 * Math.PI;
 

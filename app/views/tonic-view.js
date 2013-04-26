@@ -4,6 +4,7 @@ define(
     'backbone',
     'text!templates/tonic-view.html' ],
   function( $, _, Backbone, tonicTemplate ) {
+    'use strict';
 
     var TonicView = Backbone.View.extend({
       template: _.template( tonicTemplate ),

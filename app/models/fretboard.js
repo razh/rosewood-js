@@ -3,6 +3,7 @@ define(
     'models/note',
     'collections/tuning' ],
   function( Backbone, Note, Tuning ) {
+    'use strict';
 
     var Fretboard = Backbone.Model.extend({
       defaults: function() {

@@ -3,6 +3,7 @@ define(
     'backbone',
     'views/note-view' ],
   function( _, Backbone, NoteView  ) {
+    'use strict';
 
     var TuningView = Backbone.View.extend({
       initialize: function() {

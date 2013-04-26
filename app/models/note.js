@@ -1,6 +1,7 @@
 define(
   [ 'backbone' ],
   function( Backbone ) {
+    'use strict';
 
     var Note = Backbone.Model.extend({
       defaults: {

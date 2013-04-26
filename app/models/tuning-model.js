@@ -2,6 +2,7 @@ define(
   [ 'backbone',
     'collections/tuning' ],
   function( Backbone, Tuning ) {
+    'use strict';
 
     // A model containing a Tuning object.
     // Allows us to create a Tunings Collection object.

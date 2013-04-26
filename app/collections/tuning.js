@@ -2,6 +2,7 @@ define(
   [ 'backbone',
     'models/note' ],
   function( Backbone, Note ) {
+    'use strict';
 
     var Tuning = Backbone.Collection.extend({
       model: Note,

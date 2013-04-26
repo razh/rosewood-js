@@ -4,6 +4,7 @@ define(
     'models/note',
     'text!templates/tunings-view.html' ],
   function( _, Backbone, Note, tuningsTemplate ) {
+    'use strict';
 
     var TuningsView = Backbone.View.extend({
       template: _.template( tuningsTemplate ),

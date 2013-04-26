@@ -4,6 +4,7 @@ define(
     'backbone',
     'text!templates/scale-view.html' ],
   function( $, _, Backbone, scaleTemplate ) {
+    'use strict';
 
     var ScaleView = Backbone.View.extend({
       template: _.template( scaleTemplate ),
