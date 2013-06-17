@@ -19,6 +19,7 @@ define(
 
       render: function() {
         this.$el.html( this.template({ tunings: this.collection.models }) );
+        return this;
       },
 
       selectTuning: function() {

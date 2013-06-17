@@ -18,6 +18,7 @@ define(
 
       render: function() {
         this.$el.html( this.template({ scales: this.collection.models }) );
+        return this;
       },
 
       selectScale: function() {

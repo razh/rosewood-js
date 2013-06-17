@@ -44,6 +44,8 @@ define(
         });
 
         drawNotes( ctx, model, tuning, model.get( 'tonic' ).get( 'note' ), scale );
+
+        return this;
       },
 
       onKeyDown: function( event ) {
