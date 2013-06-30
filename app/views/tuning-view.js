@@ -20,7 +20,7 @@ define(
       render: function() {
         var that = this;
         // Reverse so that lowest string is at the bottom.
-        _( this.noteViews ).each(function( noteView ) {
+        this.noteViews.forEach(function( noteView ) {
           that.$el.append( noteView.render().el );
         });
 
@@ -29,7 +29,7 @@ define(
 
       add: function( note ) {
         // Add to front.
-        this.noteViews.splice( 0, 0, new NoteView({
+        this.noteViews.unshift(new NoteView({
           model: note
         }));
       },

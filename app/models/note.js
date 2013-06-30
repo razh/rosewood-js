@@ -77,7 +77,10 @@ define(
           note--;
         }
 
-        octave = Math.min( Math.max( octave, Note.MIN_OCTAVE ), Note.MAX_OCTAVE ); // Clamp octave.
+        // Limit note to [0, 11].
+        note = ( note + 12 ) % 12;
+        // Clamp octave.
+        octave = Math.min( Math.max( octave, Note.MIN_OCTAVE ), Note.MAX_OCTAVE );
 
         return this.set({
           note: note,
@@ -93,7 +96,7 @@ define(
     Note.MIN_OCTAVE = 0;
     Note.MAX_OCTAVE = 9;
 
-    Note.names = [ "C", "C\u266F", "D", "D\u266F", "E", "F", "F\u266F", "G", "G\u266F", "A", "A\u266F", "B" ];
+    Note.names = [ 'C', 'C\u266F', 'D', 'D\u266F', 'E', 'F', 'F\u266F', 'G', 'G\u266F', 'A', 'A\u266F', 'B' ];
     //Splits full note into note name, accidental, and octave (from 0 to 9).
     Note.regex = /(^[A-G])(b|\#|\u266d|\u266f)?([0-9]?$)/;
 
