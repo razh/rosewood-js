@@ -5,6 +5,10 @@ define(
   function( Backbone, Note, Tuning ) {
     'use strict';
 
+    /**
+     * This is more of a container for the FretboardView configuration options,
+     * rather than an actual Fretboard model.
+     */
     var Fretboard = Backbone.Model.extend({
       defaults: function() {
         return {
@@ -19,6 +23,7 @@ define(
           xOffset: 50,
           yOffset: 75,
 
+          // Maximum fretboard length for 24 frets.
           scaleLength: 1200,
           constantSpacing: false,
 
@@ -88,10 +93,11 @@ define(
 
         p = s - ( s / ( 2 ^ ( n / 12 ) ) )
      */
-     function fretPositions( model ) {
+    function fretPositions( model ) {
       var constantSpacing = model.get( 'constantSpacing' ),
           scaleLength     = model.get( 'scaleLength' ),
-          endFret         = model.get( 'endFret' );
+          endFret         = model.get( 'endFret' ),
+          spacing         = scaleLength / 24;
 
       var positions = [];
       var position;

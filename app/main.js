@@ -10,10 +10,11 @@ requirejs.config({
   },
 
   paths: {
-    'backbone': 'lib/backbone/backbone-min',
-    'bootstrap': 'lib/bootstrap/bootstrap.min',
-    'jquery': 'lib/jquery/jquery-1.9.1.min',
-    'underscore': 'lib/underscore/underscore-min'
+    'backbone': 'components/backbone/backbone-min',
+    'bootstrap': 'components/bootstrap/dist/js/bootstrap.min',
+    'jquery': 'components/jquery/jquery.min',
+    'underscore': 'components/underscore/underscore-min',
+    'text': 'components/requirejs-text/text'
   }
 });
 
@@ -22,16 +23,12 @@ define(
     'use strict';
 
     var $             = require( 'jquery' ),
-        _             = require( 'underscore' ),
-        Backbone      = require( 'backbone' ),
-        Note          = require( 'models/note' ),
         Fretboard     = require( 'models/fretboard' ),
         Scale         = require( 'models/scale' ),
         Scales        = require( 'collections/scales' ),
         Tuning        = require( 'collections/tuning' ),
         Tunings       = require( 'collections/tunings' ),
         FretboardView = require( 'views/fretboard-view' ),
-        NoteView      = require( 'views/note-view' ),
         ScaleView     = require( 'views/scale-view' ),
         ScalesView    = require( 'views/scales-view' ),
         TonicView     = require( 'views/tonic-view' ),
