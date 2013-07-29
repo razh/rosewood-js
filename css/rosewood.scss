@@ -51,11 +51,11 @@ footer {
 }
 
 .tuning {
-  margin-left: $x-offset;
 
   .note-view {
     margin: 0;
   }
+
   .note-button {
     font-weight: bolder;
   }
@@ -89,6 +89,9 @@ footer {
   float: left;
   text-align: center;
   border-radius: 50%;
+  // Bootstrap 3 uses border-box by default, thereby skewing the dimensions of
+  // toggles.
+  box-sizing: content-box;
 }
 
 @mixin toggle($size, $spacing, $font-size) {

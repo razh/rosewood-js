@@ -1,4 +1,4 @@
-<select size="<%= tunings.length %>">
+<select class="form-control" size="<%= tunings.length %>">
   <% _.each( tunings, function( tuning, i ) { %>
 
   <option value="<%= i %>">[<%= tuning.getNoteNames( '&middot;' ) %>] <%= tuning.get( 'name' ) %></option>

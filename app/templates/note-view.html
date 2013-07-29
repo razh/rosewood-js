@@ -1,6 +1,8 @@
-<div class="note-view input-append">
-  <input type="text" class="note-input input-mini" value="<%= note.toString() %>"/>
+<div class="note-view input-group">
+  <input type="text" class="note-input form-control" value="<%= note.toString() %>"/>
 
-  <button class="btn note-button add">+</button>
-  <button class="btn note-button subtract">-</button>
+  <div class="input-group-btn">
+    <button class="btn btn-default note-button add">+</button>
+    <button class="btn btn-default note-button subtract">-</button>
+  </div>
 </div>

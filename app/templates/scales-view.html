@@ -1,4 +1,4 @@
-<select size="<%= Math.min( 5, scales.length ) %>">
+<select class="form-control" size="<%= Math.min( 5, scales.length ) %>">
   <% _.each( scales, function( scale, i ) { %>
 
   <option value="<%= i %>"><%= scale.get( 'name' ) %></option>

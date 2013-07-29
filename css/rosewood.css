@@ -27,12 +27,10 @@ footer {
 .view-label {
   text-align: center; }
 
-.tuning {
-  margin-left: 60px; }
-  .tuning .note-view {
-    margin: 0; }
-  .tuning .note-button {
-    font-weight: bolder; }
+.tuning .note-view {
+  margin: 0; }
+.tuning .note-button {
+  font-weight: bolder; }
 
 .controls {
   margin-top: 25px; }
@@ -57,7 +55,8 @@ footer {
 .toggle {
   float: left;
   text-align: center;
-  border-radius: 50%; }
+  border-radius: 50%;
+  box-sizing: content-box; }
 
 /* Tonic view */
 .tonic-view {
