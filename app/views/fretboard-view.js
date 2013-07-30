@@ -28,7 +28,7 @@ define(
             ctx    = this.$el.get(0).getContext( '2d' );
 
         ctx.fillStyle = model.get( 'backgroundColor' );
-        ctx.fillRect( 0, 0, ctx.canvas.width, ctx.canvas.height );
+        ctx.clearRect( 0, 0, ctx.canvas.width, ctx.canvas.height );
 
         ctx.strokeStyle = model.get( 'foregroundColor' );
 
