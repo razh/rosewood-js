@@ -17,11 +17,11 @@ $footer-height: 50px;
 // $tonic-note-font-size: 25px;
 // $tonic-note-spacing: 5px;
 
-$scale-degree-size: 25px;
-$scale-degree-font-size: 14px;
+$scale-degree-size: 30px;
+$scale-degree-font-size: 16px;
 $scale-degree-spacing: 2px;
 
-$tonic-note-size: 25px;
+$tonic-note-size: 30px;
 $tonic-note-font-size: 14px;
 $tonic-note-spacing: 2px;
 
@@ -37,13 +37,14 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
-  margin-bottom: 0;
+  // margin-bottom: 10px;
 }
 
 .row {
   margin-left: 0;
   margin-right: 0;
 }
+
 
 header {
   width: 100%;
@@ -53,7 +54,7 @@ header {
   background-color: #333;
   letter-spacing: 4px;
   text-align: center;
-  @include box-shadow(0 1px 5px rgba(0, 0, 0, 0.5));
+  @include box-shadow(0 1px 3px rgba(0, 0, 0, 0.25));
   // @include background(linear-gradient(90deg, #333, #222, #333));
   //
   h1, h2, h3, h4, h5, h6 {
@@ -74,12 +75,13 @@ footer {
 }
 
 .sidebar {
-  min-width: 260px;
+  // min-width: 260px;
   // margin-left: 15px;
   background-color: #444;
   float: left;
   padding: 0;
   border-right: 1px solid black;
+  @include box-shadow(0 1px 3px rgba(0, 0, 0, 0.3));
 
   input,
   select,
@@ -94,24 +96,19 @@ footer {
       @include box-shadow(none);
     }
   }
-
-  @media screen and (min-width: 1170px) {
-    max-width: 300px;
-  }
 }
 
 .content {
-  min-height: 256px;
+  min-height: 100%;
   height: auto !important;
   height: 100%;
   /* Negative indent footer by it's height */
-  margin: 0;
-  padding: 0;
+  margin: 0 auto;
   float: left;
-  // background-color: red;
+  background-color: red;
 
-  @media screen and (min-width: 768px)  {
-    margin-top: $spacing;
+  canvas {
+    background-color: green;
   }
 }
 
@@ -129,10 +126,6 @@ footer {
   @include box-shadow(inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 1px 3px rgba(0, 0, 0, 0.3));
 }
 
-.control {
-  padding: 10px;
-}
-
 .tuning {
   .note-view {
     margin: 0;
@@ -143,16 +136,17 @@ footer {
   }
 }
 
+.controls {
+  margin-top: $spacing;
+}
+
 /* Piano style views */
 .scale-view,
 .tonic-view {
   @include user-select(none);
 
   height: 2 * $tonic-note-size + $tonic-note-spacing;
-  margin-top: 0.5 * $spacing;
-  margin-bottom: 0.5 * $spacing;
-
-  min-height: 75px;
+  margin-bottom: $spacing;
 }
 
 .first-group,

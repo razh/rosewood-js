@@ -95,17 +95,15 @@ define(
           tuning: tuning
         });
 
-        function resize() {
+        $( window ).resize(function() {
           var $el     = fretboardView.$el,
               $parent = $el.parent();
 
           $el[0].width  = $parent.width();
-          // Magic number, some padding added somewhere.
+          $el[0].height = $parent.height();
           fretboardView.render();
-        }
-
-        resize();
-        $( window ).resize( resize );
+          console.log('resize')
+        });
 
         fretboardView.render();
       }
