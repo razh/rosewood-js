@@ -13,20 +13,21 @@ $spacing: 25px;
 
 $footer-height: 50px;
 
-// $tonic-note-size: 50px;
-// $tonic-note-font-size: 25px;
-// $tonic-note-spacing: 5px;
+$tonic-note-size: 50px;
+$tonic-note-font-size: 25px;
+$tonic-note-spacing: 5px;
 
 $scale-degree-size: 25px;
 $scale-degree-font-size: 14px;
 $scale-degree-spacing: 2px;
 
-$tonic-note-size: 25px;
-$tonic-note-font-size: 14px;
-$tonic-note-spacing: 2px;
+// $tonic-note-size: 25px;
+// $tonic-note-font-size: 14px;
+// $tonic-note-spacing: 2px;
 
 body {
   height: 100%;
+  background-color: #333;
   font-family: "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
@@ -65,7 +66,7 @@ header {
 footer {
   padding: 30px 0;
   // margin-top: $spacing;
-  background-color: #444;
+  background-color: #222;
   height: $footer-height;
 
   .credits {
@@ -73,42 +74,34 @@ footer {
   }
 }
 
-.sidebar {
-  min-width: 260px;
-  // margin-left: 15px;
-  background-color: #444;
-  float: left;
-  padding: 0;
-  border-right: 1px solid black;
+input,
+select,
+.form-control {
+  background-color: #333;
+  color: #CCC;
+  border: none;
+  letter-spacing: 0.5px;
 
-  input,
-  select,
-  .form-control {
-    background-color: #333;
-    color: #CCC;
-    border: none;
-    letter-spacing: 0.5px;
-
-    &:focus {
-      outline: none;
-      @include box-shadow(none);
-    }
-  }
-
-  @media screen and (min-width: 1170px) {
-    max-width: 300px;
+  &:focus {
+    outline: none;
+    @include box-shadow(none);
   }
 }
+
+// .controls {
+//   background-color: #555;
+// }
 
 .content {
   min-height: 256px;
   height: auto !important;
   height: 100%;
+  width: 100%;
   /* Negative indent footer by it's height */
   margin: 0;
   padding: 0;
   float: left;
-  // background-color: red;
+  background-color: white;
 
   @media screen and (min-width: 768px)  {
     margin-top: $spacing;
@@ -117,16 +110,16 @@ footer {
 
 /* Custom CSS. */
 .view-label {
-  background-color: black;
+  // background-color: black;
   color: rgba(255, 255, 255, 0.75);
   padding: 8px;
-  padding-left: 12px;
-  font-size: 12px;
-  letter-spacing: 3px;
+  padding-left: 1em;
+  font-size: 0.75em;
+  letter-spacing: 0.25em;
   text-shadow: -1px 0 #111;
   border-bottom: 1px solid #111;
-  background-color: #333;
-  @include box-shadow(inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 1px 3px rgba(0, 0, 0, 0.3));
+  background-color: #444;
+  @include box-shadow(inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 1px 3px rgba(0, 0, 0, 0.25));
 }
 
 .control {
@@ -148,9 +141,9 @@ footer {
 .tonic-view {
   @include user-select(none);
 
-  height: 2 * $tonic-note-size + $tonic-note-spacing;
-  margin-top: 0.5 * $spacing;
-  margin-bottom: 0.5 * $spacing;
+  // height: 2 * $tonic-note-size + $tonic-note-spacing;
+  // margin-top: 0.5 * $spacing;
+  // margin-bottom: 0.5 * $spacing;
 
   min-height: 75px;
 }
@@ -204,8 +197,9 @@ footer {
 .tonic-view {
   // 16 is apparently the number of spaces that centers the tonic view.
   margin: {
-    // left: 0.5 * ($width - 7 * $tonic-note-size - 16 * $tonic-note-spacing);
+    // left: 0.25 * ($width - 7 * $tonic-note-size - 16 * $tonic-note-spacing);
     // top: $spacing;
+    bottom: 3 * $spacing;
   }
 
   .black-keys {
@@ -220,6 +214,8 @@ footer {
 
 /* Scale view */
 .scale-view {
+  margin-left: $scale-degree-spacing;
+
   @include black-keys($scale-degree-size, $scale-degree-spacing, $scale-degree-font-size);
 }
 
