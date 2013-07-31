@@ -95,16 +95,6 @@ define(
           tuning: tuning
         });
 
-        $( window ).resize(function() {
-          var $el     = fretboardView.$el,
-              $parent = $el.parent();
-
-          $el[0].width  = $parent.width();
-          $el[0].height = $parent.height();
-          fretboardView.render();
-          console.log('resize')
-        });
-
         fretboardView.render();
       }
     );
