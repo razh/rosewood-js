@@ -17,44 +17,36 @@
       <h4>ROSEWOOD</h4>
     </header>
 
-    <div class="content">
-      <div class="container">
+    <div class="row">
+      <div class="sidebar col-12 col-sm-4 col-lg-3">
+        <div class="tonic">
+          <h5 class="view-label">TONIC</h5>
+          <div class="tonic-view control" id="tonic-view"></div>
+        </div>
+
+        <div class="tuning">
+          <h5 class="view-label">TUNING</h5>
+          <div class="tuning-view control" id="tuning-view"></div>
+        </div>
+
+        <div class="tunings">
+          <h5 class="view-label">TUNINGS</h5>
+          <div class="tunings-view control" id="tunings-view"></div>
+        </div>
+
+        <div class="scales">
+          <h5 class="view-label">SCALES</h5>
+          <div class="scale-view control" id="scale-view"></div>
+          <div class="scales-view control" id="scales-view"></div>
+        </div>
+      </div>
+
+      <div class="content col-12 col-sm-8 col-lg-9">
         <canvas id="fretboard-view" height="256px"></canvas>
       </div>
     </div>
 
-
-    <div class="row controls">
-      <div class="tonic">
-        <h5 class="view-label">TONIC</h5>
-        <div class="container">
-          <div class="tonic-view control" id="tonic-view"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row controls">
-      <div class="tuning col-lg-3">
-        <h5 class="view-label">TUNING</h5>
-        <div class="tuning-view control" id="tuning-view"></div>
-      </div>
-
-      <div class="tunings col-lg-4">
-        <h5 class="view-label">TUNINGS</h5>
-        <div class="tunings-view control" id="tunings-view"></div>
-      </div>
-
-      <div class="scales col-lg-5">
-        <h5 class="view-label">SCALES</h5>
-        <div class="scale-view control" id="scale-view"></div>
-        <div class="scales-view control" id="scales-view"></div>
-      </div>
-    </div>
-
-<!--     <div class="row">
-      <footer></footer>
-    </div>
- -->
+    <footer></footer>
 
     <script data-main="app/main" src="app/components/requirejs/require.js"></script>
   </body>

@@ -5,29 +5,28 @@
 /* line 28, ../sass/screen.scss */
 body {
   height: 100%;
-  background-color: #333;
   font-family: "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 /* Change bootstrap defaults. */
-/* line 35, ../sass/screen.scss */
+/* line 34, ../sass/screen.scss */
 .container {
   width: 720px;
 }
 
-/* line 39, ../sass/screen.scss */
+/* line 38, ../sass/screen.scss */
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 0;
 }
 
-/* line 44, ../sass/screen.scss */
+/* line 43, ../sass/screen.scss */
 .row {
   margin-left: 0;
   margin-right: 0;
 }
 
-/* line 49, ../sass/screen.scss */
+/* line 48, ../sass/screen.scss */
 header {
   width: 100%;
   height: 40px;
@@ -40,108 +39,124 @@ header {
   -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
 }
-/* line 60, ../sass/screen.scss */
+/* line 59, ../sass/screen.scss */
 header h1, header h2, header h3, header h4, header h5, header h6 {
   font-weight: 100;
 }
 
 /* Taken from Bootstrap example site. */
-/* line 66, ../sass/screen.scss */
+/* line 65, ../sass/screen.scss */
 footer {
   padding: 30px 0;
-  background-color: #222;
+  background-color: #444;
   height: 50px;
 }
-/* line 72, ../sass/screen.scss */
+/* line 71, ../sass/screen.scss */
 footer .credits {
   margin-left: 40px;
 }
 
-/* line 79, ../sass/screen.scss */
-input,
-select,
-.form-control {
+/* line 76, ../sass/screen.scss */
+.sidebar {
+  min-width: 260px;
+  background-color: #444;
+  float: left;
+  padding: 0;
+  border-right: 1px solid black;
+}
+/* line 86, ../sass/screen.scss */
+.sidebar input,
+.sidebar select,
+.sidebar .form-control {
   background-color: #333;
   color: #CCC;
   border: none;
   letter-spacing: 0.5px;
 }
-/* line 85, ../sass/screen.scss */
-input:focus,
-select:focus,
-.form-control:focus {
+/* line 92, ../sass/screen.scss */
+.sidebar input:focus,
+.sidebar select:focus,
+.sidebar .form-control:focus {
   outline: none;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
 }
+@media screen and (min-width: 1170px) {
+  /* line 76, ../sass/screen.scss */
+  .sidebar {
+    max-width: 300px;
+  }
+}
 
-/* line 95, ../sass/screen.scss */
+/* line 103, ../sass/screen.scss */
 .content {
   min-height: 256px;
   height: auto !important;
   height: 100%;
-  width: 100%;
   /* Negative indent footer by it's height */
   margin: 0;
   padding: 0;
   float: left;
-  background-color: white;
 }
 @media screen and (min-width: 768px) {
-  /* line 95, ../sass/screen.scss */
+  /* line 103, ../sass/screen.scss */
   .content {
     margin-top: 25px;
   }
 }
 
 /* Custom CSS. */
-/* line 112, ../sass/screen.scss */
+/* line 119, ../sass/screen.scss */
 .view-label {
+  background-color: black;
   color: rgba(255, 255, 255, 0.75);
   padding: 8px;
-  padding-left: 1em;
-  font-size: 0.75em;
-  letter-spacing: 0.25em;
+  padding-left: 12px;
+  font-size: 12px;
+  letter-spacing: 3px;
   text-shadow: -1px 0 #111;
   border-bottom: 1px solid #111;
-  background-color: #444;
-  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 1px 3px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 1px 3px rgba(0, 0, 0, 0.25);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 1px 3px rgba(0, 0, 0, 0.25);
+  background-color: #333;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 1px 3px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 1px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-/* line 125, ../sass/screen.scss */
+/* line 132, ../sass/screen.scss */
 .control {
   padding: 10px;
 }
 
-/* line 130, ../sass/screen.scss */
+/* line 137, ../sass/screen.scss */
 .tuning .note-view {
   margin: 0;
 }
-/* line 134, ../sass/screen.scss */
+/* line 141, ../sass/screen.scss */
 .tuning .note-button {
   font-weight: bolder;
 }
 
 /* Piano style views */
-/* line 141, ../sass/screen.scss */
+/* line 148, ../sass/screen.scss */
 .scale-view,
 .tonic-view {
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
+  height: 52px;
+  margin-top: 12.5px;
+  margin-bottom: 12.5px;
   min-height: 75px;
 }
 
-/* line 152, ../sass/screen.scss */
+/* line 159, ../sass/screen.scss */
 .first-group,
 .second-group {
   display: inline-block;
 }
 
-/* line 157, ../sass/screen.scss */
+/* line 164, ../sass/screen.scss */
 .toggle {
   float: left;
   text-align: center;
@@ -151,7 +166,7 @@ select:focus,
   color: #EEE;
 }
 
-/* line 169, ../sass/screen.scss */
+/* line 176, ../sass/screen.scss */
 .selected {
   background-color: #EEE;
   background-image: none;
@@ -159,44 +174,36 @@ select:focus,
 }
 
 /* Tonic view */
-/* line 197, ../sass/screen.scss */
-.tonic-view {
-  margin-bottom: 75px;
-}
-/* line 188, ../sass/screen.scss */
+/* line 195, ../sass/screen.scss */
 .tonic-view .black-keys .first-group {
-  margin-left: 30px;
+  margin-left: 14.5px;
 }
-/* line 191, ../sass/screen.scss */
+/* line 198, ../sass/screen.scss */
 .tonic-view .black-keys .second-group {
-  margin-left: 60px;
+  margin-left: 29px;
 }
 
-/* line 210, ../sass/screen.scss */
+/* line 216, ../sass/screen.scss */
 .tonic-view .note {
-  font-size: 25px;
-  min-width: 50px;
-  min-height: 50px;
-  margin-right: 5px;
-  border: 5px solid #eeeeee;
-  line-height: 50px;
+  font-size: 14px;
+  min-width: 25px;
+  min-height: 25px;
+  margin-right: 2px;
+  border: 2px solid #eeeeee;
+  line-height: 25px;
 }
 
 /* Scale view */
-/* line 216, ../sass/screen.scss */
-.scale-view {
-  margin-left: 2px;
-}
-/* line 188, ../sass/screen.scss */
+/* line 195, ../sass/screen.scss */
 .scale-view .first-group {
   margin-left: 14.5px;
 }
-/* line 191, ../sass/screen.scss */
+/* line 198, ../sass/screen.scss */
 .scale-view .second-group {
   margin-left: 29px;
 }
 
-/* line 222, ../sass/screen.scss */
+/* line 226, ../sass/screen.scss */
 .scale-view .scale-degree {
   font-size: 14px;
   min-width: 25px;
