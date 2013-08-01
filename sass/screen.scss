@@ -1,7 +1,17 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "compass/css3/box-shadow";
+@import "compass/css3/user-interface";
+
 $width: 720px;
 $spacing: 25px;
 
+$header-height: 50px;
 $footer-height: 50px;
+$page-shadow-color: rgba(0, 0, 0, 0.5);
 
 // Distances from left side of container.
 $x-offset: 60px;
@@ -14,9 +24,15 @@ $scale-degree-size: 25px;
 $scale-degree-font-size: 16px;
 $scale-degree-spacing: 2px;
 
+$dark-gray: #444;
+$darker-gray: #333;
+
+$sans-serif: "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
 html,
 body {
   height: 100%;
+  font-family: $sans-serif;
 }
 
 /* Change bootstrap defaults. */
@@ -24,16 +40,57 @@ body {
   width: $width;
 }
 
+header {
+  width: 100%;
+  min-width: $width;
+  height: $header-height;
+
+  padding: 1em;
+
+  background-color: $darker-gray;
+  color: #ddd;
+
+  letter-spacing: 0.3em;
+  text-align: center;
+
+  @include box-shadow(0 1px 5px $page-shadow-color);
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 100;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
 /* Taken from Bootstrap example site. */
 footer {
   padding: 30px 0;
   margin-top: $spacing;
-  border-top: 1px solid #e5e5e5;
-  background-color: #f5f5f5;
+
+  min-width: $width;
   height: $footer-height;
 
-  .credits {
-    margin-left: 40px
+  background-color: $darker-gray;
+  @include box-shadow(0 -1px 5px $page-shadow-color);
+}
+
+input,
+select,
+.form-control {
+  background-color: #eee;
+  color: $darker-gray;
+  border: none;
+  letter-spacing: 0.5px;
+
+  &:focus {
+    outline: none;
+    @include box-shadow(none);
+  }
+}
+
+input {
+  &:focus {
+    background-color: #ddd;
   }
 }
 
@@ -41,17 +98,18 @@ footer {
   min-height: 100%;
   height: auto !important;
   height: 100%;
-  /* Negative indent footer by it's height */
-  margin: 0 auto;
+  margin: 0.5 * $spacing auto;
 }
 
 /* Custom CSS. */
 .view-label {
   text-align: center;
+  font-weight: 100;
+  font-size: 1.5em;
+  letter-spacing: 0.1em;
 }
 
 .tuning {
-
   .note-view {
     margin: 0;
   }
@@ -63,16 +121,13 @@ footer {
 
 .controls {
   margin-top: $spacing;
+  margin-bottom: $spacing;
 }
 
 /* Piano style views */
 .scale-view,
 .tonic-view {
-  /* Prevent note from being selected. */
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  @include user-select(none);
 }
 
 .first-group,
@@ -82,7 +137,7 @@ footer {
 
 .selected {
   color: white;
-  background-color: black;
+  background-color: $dark-gray;
 }
 
 .toggle {
@@ -102,13 +157,13 @@ footer {
 
   margin-right: $spacing;
 
-  border: $spacing solid black;
+  border: $spacing solid $dark-gray;
   line-height: $size;
 }
 
 @mixin black-keys($size, $spacing, $font-size) {
   .first-group {
-    margin-left: 0.5 * $size + $spacing;
+   margin-left: 0.5 * $size + $spacing;
   }
   .second-group {
     margin-left: $size + 2 * $spacing;
@@ -135,6 +190,7 @@ footer {
 
 /* Scale view */
 .scale-view {
+  min-width: 220px;
   @include black-keys($scale-degree-size, $scale-degree-spacing, $scale-degree-font-size);
 }
 

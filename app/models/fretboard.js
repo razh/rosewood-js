@@ -1,8 +1,7 @@
 define(
   [ 'backbone',
-    'models/note',
-    'collections/tuning' ],
-  function( Backbone, Note, Tuning ) {
+    'models/note' ],
+  function( Backbone, Note ) {
     'use strict';
 
     /**
@@ -20,7 +19,7 @@ define(
           backgroundColor: 'rgba( 255, 255, 255, 1.0 )',
           foregroundColor: 'rgba(  27,  27,  27, 1.0 )',
 
-          xOffset: 50,
+          xOffset: 60,
           yOffset: 75,
 
           // Maximum fretboard length for 24 frets.
