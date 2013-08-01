@@ -4,6 +4,7 @@
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
 @import "compass/css3/box-shadow";
+@import "compass/css3/box-sizing";
 @import "compass/css3/user-interface";
 
 $width: 720px;
@@ -146,7 +147,7 @@ input {
   border-radius: 50%;
   // Bootstrap 3 uses border-box by default, thereby skewing the dimensions of
   // toggles.
-  box-sizing: content-box;
+  @include box-sizing(content-box);
 }
 
 @mixin toggle($size, $spacing, $font-size) {
