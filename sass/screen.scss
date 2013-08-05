@@ -25,6 +25,7 @@ $scale-degree-size: 25px;
 $scale-degree-font-size: 16px;
 $scale-degree-spacing: 2px;
 
+$light-gray: #ddd;
 $dark-gray: #444;
 $darker-gray: #333;
 
@@ -49,7 +50,7 @@ header {
   padding: 1em;
 
   background-color: $darker-gray;
-  color: #ddd;
+  color: $light-gray;
 
   letter-spacing: 0.3em;
   text-align: center;
@@ -63,10 +64,21 @@ header {
   }
 }
 
+.page {
+  min-height: 100%;
+  margin-bottom: -$footer-height;
+
+  &:after {
+    content: "";
+    display: block;
+    height: $footer-height;
+  }
+}
+
 /* Taken from Bootstrap example site. */
 footer {
   padding: 30px 0;
-  margin-top: $spacing;
+  // margin-top: $spacing;
 
   min-width: $width;
   height: $footer-height;
@@ -91,7 +103,7 @@ select,
 
 input {
   &:focus {
-    background-color: #ddd;
+    background-color: $light-gray;
   }
 }
 

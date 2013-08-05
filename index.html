@@ -13,42 +13,43 @@
   <body>
     <a href="https://github.com/razh/rosewood-js"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
 
-    <header>
-      <h3>ROSEWOOD</h3>
-    </header>
+    <div class="page">
+      <header>
+        <h3>ROSEWOOD</h3>
+      </header>
 
-    <div class="container content">
-      <canvas id="fretboard-view" width="720" height="256"></canvas>
+      <div class="container content">
+        <canvas id="fretboard-view" width="720" height="256"></canvas>
 
-      <div class="row">
-        <div class="container">
-          <h4 class="view-label">TONIC</h4>
-          <hr>
-          <div class="tonic-view" id="tonic-view"></div>
+        <div class="row">
+          <div class="container">
+            <h4 class="view-label">TONIC</h4>
+            <hr>
+            <div class="tonic-view" id="tonic-view"></div>
+          </div>
+        </div>
+
+        <div class="row controls">
+          <div class="tuning col-4">
+            <h4 class="view-label">TUNING</h4>
+            <hr>
+            <div class="tuning-view" id="tuning-view"></div>
+          </div>
+
+          <div class="tunings col-4">
+            <h4 class="view-label">TUNINGS</h4>
+            <hr>
+            <div class="tunings-view" id="tunings-view"></div>
+          </div>
+
+          <div class="scales col-4">
+            <h4 class="view-label">SCALES</h4>
+            <hr>
+            <div class="scale-view" id="scale-view"></div>
+            <div class="scales-view" id="scales-view"></div>
+          </div>
         </div>
       </div>
-
-      <div class="row controls">
-        <div class="tuning col-4">
-          <h4 class="view-label">TUNING</h4>
-          <hr>
-          <div class="tuning-view" id="tuning-view"></div>
-        </div>
-
-        <div class="tunings col-4">
-          <h4 class="view-label">TUNINGS</h4>
-          <hr>
-          <div class="tunings-view" id="tunings-view"></div>
-        </div>
-
-        <div class="scales col-4">
-          <h4 class="view-label">SCALES</h4>
-          <hr>
-          <div class="scale-view" id="scale-view"></div>
-          <div class="scales-view" id="scales-view"></div>
-        </div>
-      </div>
-
     </div>
 
     <footer></footer>
