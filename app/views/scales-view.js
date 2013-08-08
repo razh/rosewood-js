@@ -22,7 +22,7 @@ define(
       },
 
       selectScale: function() {
-        var index = this.$el.find( ':selected' ).val();
+        var index = this.$( ':selected' ).val();
         if ( typeof index === 'undefined' ) {
           return;
         }

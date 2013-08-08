@@ -14,7 +14,7 @@ define(
         );
 
         this.listenTo( this.collection, 'all', this.render );
-        this.collection.each( this.add );
+        this.addAll();
       },
 
       render: function() {

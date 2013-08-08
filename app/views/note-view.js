@@ -27,7 +27,7 @@ define(
       },
 
       inputNote: function( event ) {
-        var $inputElement = this.$el.find( '.note-input' );
+        var $inputElement = this.$( '.note-input' ),
             value         = $inputElement.val();
 
         // Only validate input on Enter.
@@ -40,7 +40,7 @@ define(
           if ( matches && matches[0] === value ) {
             this.model.fromString( value );
             this.previousValidValue = value;
-           } else {
+          } else {
             $inputElement.val( this.previousValidValue );
           }
         }
