@@ -1,39 +1,38 @@
-define(
-  [ 'underscore',
-    'backbone',
-    'models/note',
-    'text!templates/tunings-view.html' ],
-  function( _, Backbone, Note, tuningsTemplate ) {
-    'use strict';
+define([
+  'underscore',
+  'backbone',
+  'models/note',
+  'text!templates/tunings-view.html'
+], function( _, Backbone, Note, tuningsTemplate ) {
+  'use strict';
 
-    var TuningsView = Backbone.View.extend({
-      template: _.template( tuningsTemplate ),
+  var TuningsView = Backbone.View.extend({
+    template: _.template( tuningsTemplate ),
 
-      events: {
-        'change': 'selectTuning'
-      },
+    events: {
+      'change': 'selectTuning'
+    },
 
-      initialize: function() {
-        _.bindAll( this, 'render' );
-      },
+    initialize: function() {
+      _.bindAll( this, 'render' );
+    },
 
-      render: function() {
-        this.$el.html( this.template({ tunings: this.collection.models }) );
-        return this;
-      },
+    render: function() {
+      this.$el.html( this.template({ tunings: this.collection.models }) );
+      return this;
+    },
 
-      selectTuning: function() {
-        var index = this.$( ':selected' ).val();
-        if ( typeof index === 'undefined' ) {
-          return;
-        }
-
-        // Change current selected tuning.
-        this.options.tuning.setTuning( this.collection.at( index ).get( 'tuning' ) );
-        this.options.tuningView.refresh();
+    selectTuning: function() {
+      var index = this.$( ':selected' ).val();
+      if ( typeof index === 'undefined' ) {
+        return;
       }
-    });
 
-    return TuningsView;
-  }
-);
+      // Change current selected tuning.
+      this.options.tuning.setTuning( this.collection.at( index ).get( 'tuning' ) );
+      this.options.tuningView.refresh();
+    }
+  });
+
+  return TuningsView;
+});

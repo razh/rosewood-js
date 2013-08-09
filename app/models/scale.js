@@ -1,17 +1,16 @@
-define(
-  [ 'backbone' ],
-  function( Backbone ) {
-    'use strict';
+define([
+  'backbone'
+], function( Backbone ) {
+  'use strict';
 
-    var Scale = Backbone.Model.extend({
-      defaults: function() {
-        return {
-          name: '',
-          degrees: []
-        };
-      }
-    });
+  var Scale = Backbone.Model.extend({
+    defaults: function() {
+      return {
+        name: '',
+        degrees: []
+      };
+    }
+  });
 
-    return Scale;
-  }
-);
+  return Scale;
+});
