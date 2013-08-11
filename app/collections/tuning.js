@@ -9,7 +9,7 @@ define([
 
     setTuning: function( tuning ) {
       var difference = tuning.length - this.length;
-      var model;
+
       // Remove/add Note models to match number of notes in new tuning.
       if ( difference > 0 ) {
         while ( difference-- ) {
@@ -21,8 +21,10 @@ define([
         }
       }
 
+      var that = this,
+          model;
+
       // Set tuning to new tuning.
-      var that = this;
       tuning.each(function( note, index ) {
         model = that.at( index );
         model.set({

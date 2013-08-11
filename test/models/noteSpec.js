@@ -17,7 +17,7 @@ define(function( require ) {
       expect( b6.get( 'octave' ) ).toBe(6);
     });
 
-    it( 'should have note names', function() {
+    it( 'has note names', function() {
       expect( Note.names[ Note.C       ] ).toBe( 'C'       );
       expect( Note.names[ Note.C_SHARP ] ).toBe( 'C\u266F' );
       expect( Note.names[ Note.D       ] ).toBe( 'D'       );
@@ -34,19 +34,19 @@ define(function( require ) {
       expect( Note.fromString( 'A#5' ).getNoteName() ).toBe( 'A\u266F' );
     });
 
-    it( 'should have a toString() method which returns a note-name and octave string', function() {
+    it( 'has a toString() method which returns a note-name and octave string', function() {
       expect( Note.fromString( 'F#5' ).toString() ).toBe( 'F\u266F5' );
       expect( Note.fromString( 'C7' ).toString() ).toBe( 'C7' );
     });
 
-    it( 'should transpose', function() {
+    it( 'transposes', function() {
       var b5 = Note.fromString( 'B5' );
       expect( b5.transpose( 12 ) ).toBe( Note.B );
       expect( b5.transpose( -1 ) ).toBe( Note.A_SHARP );
       expect( b5.transpose( 1 ) ).toBe( Note.C );
     });
 
-    it ( 'should self-transpose', function() {
+    it ( 'self-transposes', function() {
       var f4 = Note.fromString( 'F4' );
 
       f4.transposeSelf( -1 );
@@ -62,7 +62,7 @@ define(function( require ) {
       expect( f4.get( 'octave' ) ).toBe( 3 );
     });
 
-    it( 'should not allow invalid note values', function() {
+    it( 'does not allow invalid note values', function() {
       var cb5 = Note.fromString( 'Cb5' );
       // A C flat is a B.
       expect( cb5.get( 'note' ) ).toBe( Note.B );
@@ -74,7 +74,7 @@ define(function( require ) {
       expect( bSharp3.get( 'octave' ) ).toBe(3);
     });
 
-    it( 'should not allow invalid octave values', function() {
+    it( 'does not allow invalid octave values', function() {
       // The regex for notes only allows single digits.
       var a19 = Note.fromString( 'A19' );
       expect( a19.get( 'note' ) ).toBe( Note.C );

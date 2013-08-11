@@ -19,6 +19,7 @@ requirejs.config({
     }
   },
 
+
   // Use un-minified files unlike main.js.
   paths: {
     'backbone': 'components/backbone/backbone',
