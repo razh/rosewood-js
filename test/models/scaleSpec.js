@@ -18,10 +18,7 @@ define(function( require ) {
         degrees: [ 0, 2, 4 ]
       });
 
-      expect( scale.get( 'degrees' ).length ).toBe(3);
-      expect( scale.get( 'degrees' )[0] ).toBe(0);
-      expect( scale.get( 'degrees' )[1] ).toBe(2);
-      expect( scale.get( 'degrees' )[2] ).toBe(4);
+      expect( scale.get( 'degrees' ) ).toEqual( [0, 2, 4] );
     });
   });
 });
