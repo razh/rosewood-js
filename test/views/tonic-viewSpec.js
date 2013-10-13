@@ -1,3 +1,4 @@
+/*globals define, describe, beforeEach, it, expect*/
 define(function( require ) {
   'use strict';
 

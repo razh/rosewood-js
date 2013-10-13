@@ -1,3 +1,4 @@
+/*globals requirejs, define*/
 requirejs.config({
   shim: {
     'underscore': {

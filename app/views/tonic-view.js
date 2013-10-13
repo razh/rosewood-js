@@ -1,3 +1,4 @@
+/*globals define*/
 define([
   'jquery',
   'underscore',

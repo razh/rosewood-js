@@ -1,3 +1,4 @@
+/*globals requirejs*/
 // Add all specs to tests.
 var tests = [];
 for ( var file in window.__karma__.files ) {

@@ -1,3 +1,4 @@
+/*globals define*/
 define([
   'backbone',
   'collections/tuning'
