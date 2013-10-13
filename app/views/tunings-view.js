@@ -13,8 +13,11 @@ define([
       'change': 'selectTuning'
     },
 
-    initialize: function() {
+    initialize: function( options ) {
       _.bindAll( this, 'render' );
+
+      this.tuning     = options.tuning;
+      this.tuningView = options.tuningView;
     },
 
     render: function() {
@@ -29,8 +32,8 @@ define([
       }
 
       // Change current selected tuning.
-      this.options.tuning.setTuning( this.collection.at( index ).get( 'tuning' ) );
-      this.options.tuningView.refresh();
+      this.tuning.setTuning( this.collection.at( index ).get( 'tuning' ) );
+      this.tuningView.refresh();
     }
   });
 

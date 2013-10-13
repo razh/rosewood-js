@@ -18,6 +18,7 @@ define([
 
       var tuningModels = [],
           tuningModel, tuning, notes;
+
       _.each( models, function( model ) {
         // Parse notes of each tuning.
         notes = [];
@@ -26,7 +27,8 @@ define([
         });
 
         // Create a new tuning and populate it with current data.
-        tuning = Backbone.Collection.prototype.set.call( new Tuning(), notes );
+        tuning = new Tuning();
+        Backbone.Collection.prototype.set.call( tuning, notes );
 
         tuningModel = {
           name: model.name,
@@ -37,7 +39,8 @@ define([
         tuningModels.push( tuningModel );
       });
 
-      return Backbone.Collection.prototype.set.call( this, tuningModels, options );
+      Backbone.Collection.prototype.set.call( this, tuningModels, options );
+      return this;
     }
   });
 

@@ -11,20 +11,23 @@ define([
 
   var FretboardView = Backbone.View.extend({
 
-    initialize: function() {
+    initialize: function( options ) {
       _.bindAll( this, 'render', 'onKeyDown' );
 
       $( document ).bind( 'keydown', this.onKeyDown );
 
+      this.scale  = options.scale;
+      this.tuning = options.tuning;
+
       this.listenTo( this.model, 'change', this.render );
-      this.listenTo( this.options.scale, 'change', this.render );
-      this.listenTo( this.options.tuning, 'change', this.render );
+      this.listenTo( this.scale, 'change', this.render );
+      this.listenTo( this.tuning, 'change', this.render );
     },
 
     render: function() {
       var model  = this.model,
-          scale  = this.options.scale,
-          tuning = this.options.tuning,
+          scale  = this.scale,
+          tuning = this.tuning,
           ctx    = this.$el.get(0).getContext( '2d' );
 
       ctx.clearRect( 0, 0, ctx.canvas.width, ctx.canvas.height );
@@ -79,23 +82,23 @@ define([
   }
 
   function drawStrings( ctx, model, tuning ) {
-      var stringSpacing = model.get( 'stringSpacing' ),
-          length        = model.get( 'length' ),
-          xOffset       = model.get( 'xOffset' ),
-          yOffset       = model.get( 'yOffset' );
+    var stringSpacing = model.get( 'stringSpacing' ),
+        length        = model.get( 'length' ),
+        xOffset       = model.get( 'xOffset' ),
+        yOffset       = model.get( 'yOffset' );
 
-      ctx.lineWidth = model.get( 'stringWidth' );
-      // Start off at one because of nut.
-      var y;
-      ctx.beginPath();
-      for ( var i = 0, n = tuning.length; i < n; i++ ) {
-        y = ( i * stringSpacing ) + yOffset;
+    ctx.lineWidth = model.get( 'stringWidth' );
+    // Start off at one because of nut.
+    var y;
+    ctx.beginPath();
+    for ( var i = 0, n = tuning.length; i < n; i++ ) {
+      y = ( i * stringSpacing ) + yOffset;
 
-        ctx.moveTo( xOffset,          y );
-        ctx.lineTo( xOffset + length, y );
-      }
+      ctx.moveTo( xOffset,          y );
+      ctx.lineTo( xOffset + length, y );
+    }
 
-      ctx.stroke();
+    ctx.stroke();
   }
 
   function drawNut( ctx, model, tuning ) {
